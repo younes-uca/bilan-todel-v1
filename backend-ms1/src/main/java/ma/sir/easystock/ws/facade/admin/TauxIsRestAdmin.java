@@ -14,6 +14,7 @@ import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,7 +65,14 @@ public class TauxIsRestAdmin  extends AbstractController<TauxIs, TauxIsDto, Taux
     @ApiOperation("Saves the specified  tauxIs")
     @PostMapping("")
     public ResponseEntity<TauxIsDto> save(@RequestBody TauxIsDto dto) throws Exception {
-        return super.save(dto);
+        if(dto!=null){
+            converter.init(true);
+            TauxIs item = converter.toItem(dto);
+            TauxIsDto tauxIsDto = converter.toDto(service.save(item));
+            return new ResponseEntity<>(tauxIsDto, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
+        }
     }
 
     @ApiOperation("Updates the specified  tauxIs")

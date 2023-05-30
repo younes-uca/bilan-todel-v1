@@ -14,6 +14,7 @@ import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,9 +68,16 @@ public class DeclarationIsRestAdmin  extends AbstractController<DeclarationIs, D
         return super.findById(id, includes, excludes);
     }
     @ApiOperation("Saves the specified  declarationIs")
-    @PostMapping("")
-    public ResponseEntity<DeclarationIsDto> save(@RequestBody DeclarationIsDto dto) throws Exception {
-        return super.save(dto);
+    @PostMapping("simuler/{simuler}")
+    public ResponseEntity<DeclarationIsDto> save(@PathVariable boolean simuler,@RequestBody DeclarationIsDto dto) throws Exception {
+        if(dto!=null){
+            converter.init(true);
+            DeclarationIs item = converter.toItem(dto);
+            DeclarationIsDto declarationIsDto = converter.toDto(service.save(simuler,item));
+            return new ResponseEntity<>(declarationIsDto, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
+        }
     }
 
     @ApiOperation("Updates the specified  declarationIs")

@@ -11,6 +11,8 @@ import org.springframework.http.HttpEntity;
 
 public interface DeclarationIsAdminService extends  IService<DeclarationIs,DeclarationIsCriteria, DeclarationIsHistoryCriteria>  {
 
+    DeclarationIs save(boolean simuler, DeclarationIs declarationIs);
+
     List<DeclarationIs> findBySocieteId(Long id);
     int deleteBySocieteId(Long id);
     List<DeclarationIs> findByTauxIsId(Long id);
