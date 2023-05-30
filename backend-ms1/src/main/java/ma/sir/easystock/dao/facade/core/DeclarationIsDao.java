@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface DeclarationIsDao extends AbstractRepository<DeclarationIs,Long>  {
+    DeclarationIs findBySocieteIceAndAnneeAndTrimistre(String ice,int annee,int trimistre);
     DeclarationIs findByReference(String reference);
     int deleteByReference(String reference);
 
