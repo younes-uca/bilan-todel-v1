@@ -9,8 +9,12 @@ import ma.sir.easystock.dao.facade.history.ProduitHistoryDao;
 import ma.sir.easystock.dao.specification.core.ProduitSpecification;
 import ma.sir.easystock.service.facade.admin.ProduitAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
+import ma.sir.easystock.zynerator.service.Attribute;
 import ma.sir.easystock.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import ma.sir.easystock.zynerator.util.VelocityPdf;
@@ -24,6 +28,7 @@ import ma.sir.easystock.service.facade.admin.UniteMesureAdminService ;
 import ma.sir.easystock.service.facade.admin.StoreAdminService ;
 import ma.sir.easystock.service.facade.admin.MarqueAdminService ;
 import ma.sir.easystock.service.facade.admin.CategorieProduitAdminService ;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -38,6 +43,11 @@ ProduitHistoryDao> implements ProduitAdminService {
         return velocityPdf.createPdf(FILE_NAME, TEMPLATE, dto);
     }
 
+
+    @Override
+    public List<Produit> importExcel(MultipartFile file) {
+        return super.importExcel(file);
+    }
 
     public Produit findByReferenceEntity(Produit t){
         return  dao.findByReference(t.getReference());

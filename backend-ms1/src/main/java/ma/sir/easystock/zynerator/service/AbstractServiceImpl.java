@@ -36,10 +36,14 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.*;
+
+import static org.slf4j.helpers.Util.getCallingClass;
 
 public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H extends HistBusinessObject, CRITERIA extends BaseCriteria, HC extends HistCriteria, REPO extends AbstractRepository<T, Long>, HISTREPO extends AbstractHistoryRepository<H, Long>> extends AbstractServiceImplHelper<T> {
 
@@ -424,8 +428,10 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
 
     public List<T> importExcel(MultipartFile file) {
         if (isValidExcelFile(file)) {
+            Class<T> clazz = (Class<T>) getCallingClass();  // Get the class type dynamically
+
             try {
-                List<T> items = read(file.getInputStream(), getAttributes());
+                List<T> items = read(file.getInputStream(), clazz, getAttributes());
                 this.dao.saveAll(items);
                 return items;
             } catch (IOException e) {
@@ -444,7 +450,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
     // create a methode that reade the file and take an inputStream as object and return a liste of commandes
-    private List<T> read(InputStream inputStream, List<Attribute> attributes) {
+    private List<T> read(InputStream inputStream, Class<T> clazz,List<Attribute> attributes) {
         List<T> items = new ArrayList<>();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);

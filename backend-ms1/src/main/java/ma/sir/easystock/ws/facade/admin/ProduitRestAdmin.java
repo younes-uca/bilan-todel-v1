@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.sir.easystock.zynerator.process.Result;
 
@@ -32,6 +34,11 @@ import ma.sir.easystock.zynerator.dto.FileTempDto;
 public class ProduitRestAdmin  extends AbstractController<Produit, ProduitDto, ProduitHistory, ProduitCriteria, ProduitHistoryCriteria, ProduitAdminService, ProduitConverter> {
 
 
+    @PostMapping("import")
+    public ResponseEntity<?> uploadProduitsData(@RequestParam("file") MultipartFile file){
+        this.service.importExcel(file);
+        return ResponseEntity.ok(Map.of("Message" , " Produits data uploaded and saved to database successfully"));
+    }
 
     @ApiOperation("Exporte pdf")
     @PostMapping("exportPdf/")

@@ -70,6 +70,7 @@ export class DeclarationTvaListAdminComponent extends AbstractListController<Dec
     }
 
 
+
     public async loadSociete(){
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('DeclarationTva', 'list');

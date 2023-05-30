@@ -9,8 +9,11 @@ import ma.sir.easystock.dao.facade.history.OperationComptableHistoryDao;
 import ma.sir.easystock.dao.specification.core.OperationComptableSpecification;
 import ma.sir.easystock.service.facade.admin.OperationComptableAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
+import ma.sir.easystock.zynerator.service.Attribute;
 import ma.sir.easystock.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import ma.sir.easystock.zynerator.util.VelocityPdf;

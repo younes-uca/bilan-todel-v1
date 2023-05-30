@@ -21,11 +21,19 @@ import {UniteMesureDto} from '../model/UniteMesure.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProduitService extends AbstractService<ProduitDto, ProduitCriteria> {
      constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/produit/');
+    }
+    save(): Observable<ProduitDto> {
+
+        return super.save();
+    }
+    importExcel(file: File): Observable<Array<ProduitDto>> {
+        return super.importExcel(file);
     }
 
     public constrcutDto(): ProduitDto {

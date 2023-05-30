@@ -253,10 +253,10 @@ public class ExportUtil {
         HSSFFont font = wb.createFont();
         font.setBold(bold);
         font.setFontHeightInPoints(size);
-        font.setColor(HSSFColor.WHITE.index);
+       // font.setColor(HSSFColor.WHITE.index);
         font.setFontName(fontName);
         style.setFont(font);
-        style.setFillForegroundColor(HSSFColor.GREY_80_PERCENT.index);
+        //style.setFillForegroundColor(HSSFColor.GREY_80_PERCENT.index);
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         return style;
     }
