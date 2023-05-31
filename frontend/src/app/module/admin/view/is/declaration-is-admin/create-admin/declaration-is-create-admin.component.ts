@@ -20,8 +20,10 @@ import {ComptableValidateurService} from 'src/app/controller/service/ComptableVa
 export class DeclarationIsCreateAdminComponent extends AbstractCreateController<DeclarationIsDto, DeclarationIsCriteria, DeclarationIsService>  implements OnInit {
 
 
-
-   private _validDeclarationIsReference = true;
+     trimestres : number[] = [];
+     years: number[] = [];
+    private simuler : boolean = true;
+    private _validDeclarationIsReference = true;
     private _validSocieteIce = true;
     private _validComptableTraitantCin = true;
     private _validComptableValidateurCin = true;
@@ -43,7 +45,86 @@ export class DeclarationIsCreateAdminComponent extends AbstractCreateController<
 
 
 
+    public save():void{
+        this.declarationIsService.savee(false).subscribe(data =>{
+                if(data != null) {
+                    this.declarationIsService.items.push({...data}) ;
+                    this.item= this.declarationIsService.constrcutDto();
+                    this.createDialog = false;
+                    this.years=[];
+                    this.trimestres=[];
+                }else this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+        )
+    }
 
+    public onSimuler(): void {
+        if(this.getDateAvailable(this.item.annee,this.item.trimistre)<new Date()){
+            this.simuler = false;
+            this.declarationIsService.savee(true).subscribe(data => {
+                this.item = data;
+            });
+        }else alert("TAXE PAS ENCORE DISPONIBLE");
+
+    }
+
+    public getDateAvailable(annee: number, trimestre: number): Date {
+        let date: Date | null = null;
+
+        if (trimestre === 1) {
+            date = new Date(annee, 3, 1, 0, 0, 0);
+        }
+        if (trimestre === 2) {
+            date = new Date(annee, 6, 1, 0, 0, 0);
+        }
+        if (trimestre === 3) {
+            date = new Date(annee, 9, 1, 0, 0, 0);
+        }
+        if (trimestre === 4) {
+            date = new Date(annee, 12,1, 0, 0, 0);
+        }
+        return date as Date;
+    }
+
+    public getAnnee() : void{
+        if (this.item.societe.dernierTrimestrePayerIs==4){
+            this.years=[this.item.societe.dernierAnneePayerIs+1];
+        }else {
+            this.years=[this.item.societe.dernierAnneePayerIs];
+        }
+    }
+
+    public getTrimestre() : void{
+        if (this.item.societe.dernierTrimestrePayerIs==4){
+            this.trimestres=[1];
+        }else {
+            this.trimestres=[this.item.societe.dernierTrimestrePayerIs+1];
+        }
+    }
+
+
+
+
+    public exportPdf(element: DeclarationIsDto): void{
+        this.service.exportPdf(element).subscribe((data: ArrayBuffer) => {
+            const blob = new Blob([data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'DeclarationIs.pdf';
+            link.setAttribute('target', '_blank'); // open link in new tab
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }, (error) => {
+            console.error(error); // handle any errors that occur
+        });
+    }
+
+    public hideCreateDialog() {
+        super.hideCreateDialog();
+        this.years=[];
+        this.trimestres=[];
+    }
 
     public setValidation(value: boolean){
         this.validDeclarationIsReference = value;
