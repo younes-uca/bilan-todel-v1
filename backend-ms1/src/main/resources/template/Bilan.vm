@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-    <title>Invoice</title>
+    <title>Bilan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 18px;
+            font-size: 14px;
             line-height: 1.5;
             margin: 0;
             padding: 0;
-
+            color: #333;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        td{
 
+            padding-left: 10%;
+        }
+        th {
+            background-color: #cccccc;
+        }
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -50,22 +67,7 @@
             line-height: 1.5;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        th, td {
-            height: 40px;
-            text-align: left;
-            font-size: 17px;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            font-weight: bold;
-        }
 
         .totals {
             margin-top: 20px;
@@ -91,93 +93,79 @@
 <body>
 <div class="container">
     <div class="header" style="font-family: Noto Sans JP, sans-serif;">
-        <h1>REÇU</h1>
-    </div>
-    <br/>
-    <hr style="color:#c9302c ;height: 3px"></hr>
-    <br/>
-
+        <h1>Bilan Commercial</h1>
+    </div><br/>
+    <hr style="color:#c9302c ;height: 3px"></hr><br/><br/><br/><br/>
     <table style="width: 100%">
 
-                            <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Ref:</span> $ref</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Annee:</span> $annee</td>
-                    </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Societe:</span> $societe.ice</td>
-                </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ImmobilisationsIncorporelles:</span> $immobilisationsIncorporelles</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ImmobilisationsCorporelles:</span> $immobilisationsCorporelles</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ImmobilisationsFinancieres:</span> $immobilisationsFinancieres</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalActifImmobolise:</span> $totalActifImmobolise</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Stocks:</span> $stocks</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">CreancesClients:</span> $creancesClients</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalActifCirculant:</span> $totalActifCirculant</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">DepotEnBanque:</span> $depotEnBanque</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">AvoirEnCaisse:</span> $avoirEnCaisse</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalTresorieActif:</span> $totalTresorieActif</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalActif:</span> $totalActif</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">CapitalPersonnel:</span> $capitalPersonnel</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Emprunts:</span> $emprunts</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Resultat:</span> $resultat</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalFinnancementPermanant:</span> $totalFinnancementPermanant</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">DettesFournisseurs:</span> $dettesFournisseurs</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">AutresDettesCirculantes:</span> $autresDettesCirculantes</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalPassifCirculant:</span> $totalPassifCirculant</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalPassif:</span> $totalPassif</td>
-                    </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">EtatBilan:</span> $etatBilan.libelle</td>
-                </tr>
-
+        <tr>
+            <td style="text-align: left;border-bottom: 0;border:0px;padding:0 10px;font-size: 20px;"> <span style="font-weight: bold;">Société:</span> $societe.ice</td>
+            <td style="text-align: right;border-bottom: 0;border:0px;padding:0 10px;font-size: 20px;"> <span style="font-weight: bold;">Année:</span> $annee</td>
+        </tr>
     </table>
-    <br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Actif</th>
+            <th>Prix (DH)</th>
+            <th>Passif</th>
+            <th>Prix (DH)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="text-align: left;width: 35%">Immobilisations Incorporelles <br/><br/>Immobilisations Corporelles <br/><br/>Immobilisations Financieres </td>
+            <td>$immobilisationsIncorporelles <br/><br/>$immobilisationsCorporelles<br/><br/>$immobilisationsFinancieres </td>
+            <td style="text-align: left;width: 30%">Capital Personnel <br/><br/>Emprunts <br/><br/>Resultat </td>
+            <td>$capitalPersonnel <br/><br/>$emprunts <br/><br/>$resultat </td>
+        </tr>
+        <tr>
+            <th style="text-align: right; padding-right: 5%;"> Total Actif Immobolise</th>
+            <th>$totalActifImmobolise</th>
+            <th style="text-align: right; padding-right: 5%;">Total Finnancement Permanant </th>
+            <th>$totalFinnancementPermanant </th>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;">Stocks  <br/><br/>Creances Clients </td>
+            <td>$stocks <br/><br/>$creancesClients </td>
+            <td style="text-align: left;">Dettes Fournisseurs <br/><br/>Autres Dettes Circulantes</td>
+            <td>$dettesFournisseurs <br/><br/>$autresDettesCirculantes </td>
+        </tr>
+        <tr>
+            <th style="text-align: right; padding-right: 5%;"> Total Actif Circulant</th>
+            <th>$totalActifCirculant </th>
+            <th style="text-align: right; padding-right: 5%;">Total Passif Circulant </th>
+            <th>$totalPassifCirculant </th>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Depot En Banque<br/><br/>Avoir En Caisse  </td>
+            <td>$depotEnBanque  <br/><br/>$avoirEnCaisse  </td>
+            <td style="border-bottom: none;border-right: none;"> <br/><br/></td>
+            <td style="border-bottom: none;border-left: none;"><br/><br/> </td>
+        </tr>
+        <tr>
+            <th style="text-align: right; padding-right: 5%;"> Total Tresorie Actif </th>
+            <th>$totalTresorieActif  </th>
+            <td style="border-top: none;border-right: none;"></td>
+            <td style="border-top: none;border-left: none;"></td>
+
+        </tr>
+        <tr style="color: black;">
+            <th style="text-align: right; padding-right: 5%;background-color:rgb(70, 70, 70);"> Total Actif</th>
+            <th style="background-color:rgb(70, 70, 70);">$totalActif </th>
+            <th style="text-align: right; padding-right: 5%;background-color:rgb(70, 70, 70);">Total Passif </th>
+            <th style="background-color:rgb(70, 70, 70);">$totalPassif</th>
+        </tr>
+        </tbody>
+    </table><br/><br/><br/><br/><br/>
+
 
     <div class="footer">
         <p style="font-size: 25px">MERCI POUR VOTRE SERVICE!</p>
-        <p style="font-size: 18px">Si vous avez des questions, veillez contacter nous.</p>
-    </div>
-    <br/><br/>
+        <p style="font-size: 18px">Si vous avez des questions, veillez nous contacter.</p>
+    </div><br/><br/>
     <hr style="color:#c9302c ;height: 3px"></hr>
 </div>
 </body>

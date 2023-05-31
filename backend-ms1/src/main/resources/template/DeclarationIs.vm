@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-    <title>Invoice</title>
+    <title>DeclarationIs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
         th, td {
             height: 40px;
             text-align: left;
-            font-size: 17px;
+            font-size: 20px;
             padding: 8px;
             border-bottom: 1px solid #ddd;
         }
@@ -86,69 +86,78 @@
             line-height: 1.5;
         }
 
+        .bill-box {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+            color: #ADADAD; }
+        .bill-box .left, .bill-box .right {
+            max-width: 240px;}
+        .bill-box .text-m {
+            font-size: 18px;
+            margin-bottom: 1rem;
+            text-transform: uppercase; }
+        .bill-box .title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: #2B2B2B; }
+
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header" style="font-family: Noto Sans JP, sans-serif;">
         <h1>REÇU</h1>
-    </div>
-    <br/>
-    <hr style="color:#c9302c ;height: 3px"></hr>
-    <br/>
+    </div><br/>
+    <hr style="color:#c9302c ;height: 3px"></hr><br/>
+
+    <div class="bill-box">
+        <div class="left">
+            <div class="text-m" style="font-size: 22px">DE:</div>
+            <div class="title" style="font-size: 30px;margin-bottom: 1rem;font-weight: 600;color: #2B2B2B;" >Trésorerie Générale<br/>Du Royaume</div>
+            <div class="addr">Rue Al andaloussia, Hay Riad<br/>Rabat, +212 5 37 57 81 90<br/>administ@tgr.gov.ma</div>
+        </div>
+
+    </div><br/><br/><br/><br/>
 
     <table style="width: 100%">
 
-                            <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Reference:</span> $reference</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">DateDeclaration:</span> $dateDeclaration</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Trimistre:</span> $trimistre</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Annee:</span> $annee</td>
-                    </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Societe:</span> $societe.ice</td>
-                </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalCharge:</span> $totalCharge</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TotalProduit:</span> $totalProduit</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ResultatAvantImpot:</span> $resultatAvantImpot</td>
-                    </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">TauxIs:</span> $tauxIs.id</td>
-                </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">MontantImpot:</span> $montantImpot</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ResultatApresImpot:</span> $resultatApresImpot</td>
-                    </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ComptableTraitant:</span> $comptableTraitant.cin</td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">ComptableValidateur:</span> $comptableValidateur.cin</td>
-                </tr>
+        <tr>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Société:</span> $societe.ice</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Année:</span> $annee</td>
+        </tr>
 
-    </table>
-    <br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/>
+        <tr>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Trimestre:</span> $trimistre</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total charge:</span> $totalCharge</td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total produit:</span> $totalProduit</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat avant impôt:</span> $resultatAvantImpot</td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Montant impôt:</span> $montantImpot</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat après impôt:</span> $resultatApresImpot</td>
+        </tr>
+
+
+
+    </table><br/><br/><br/><br/><br/>
+
 
     <div class="footer">
-        <p style="font-size: 25px">MERCI POUR VOTRE SERVICE!</p>
-        <p style="font-size: 18px">Si vous avez des questions, veillez contacter nous.</p>
-    </div>
-    <br/><br/>
+        <p style="font-size: 18px">MERCI POUR VOTRE SERVICE!</p>
+        <p style="font-size: 14px;margin-top: 1rem;">www.tgr.gov.ma</p>
+    </div><br/>
     <hr style="color:#c9302c ;height: 3px"></hr>
+    <table style="width: 100%;">
+        <tr style="padding:0px 8px">
+            <td style="text-align: left;border-bottom: 0;padding:8px 8px;height: 5px"> <span style="font-weight: bold;">Date declaration:</span> $dateDeclaration</td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

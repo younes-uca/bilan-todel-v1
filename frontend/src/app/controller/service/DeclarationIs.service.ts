@@ -28,6 +28,10 @@ export class DeclarationIsService extends AbstractService<DeclarationIsDto, Decl
         this.setApi(environment.apiUrl + 'admin/declarationIs/');
     }
 
+    public savee(simuler : boolean): Observable<DeclarationIsDto> {
+        return this.http.post<DeclarationIsDto>( this.API+'simuler/'+ simuler , this.item);
+    }
+
     public constrcutDto(): DeclarationIsDto {
         return new DeclarationIsDto();
     }

@@ -8,9 +8,9 @@ import ma.sir.easystock.dao.facade.core.BilanDao;
 import ma.sir.easystock.dao.facade.history.BilanHistoryDao;
 import ma.sir.easystock.dao.specification.core.BilanSpecification;
 import ma.sir.easystock.service.facade.admin.BilanAdminService;
+import ma.sir.easystock.service.facade.admin.OperationComptableAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
 import ma.sir.easystock.zynerator.service.Attribute;
-import ma.sir.easystock.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,8 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ma.sir.easystock.service.facade.admin.SocieteAdminService ;
 import ma.sir.easystock.service.facade.admin.EtatBilanAdminService ;
 
-
-import java.util.List;
 @Service
 public class BilanAdminServiceImpl extends AbstractServiceImpl<Bilan,BilanHistory, BilanCriteria, BilanHistoryCriteria, BilanDao,
 BilanHistoryDao> implements BilanAdminService {
@@ -64,6 +62,18 @@ public static final List<Attribute> ATTRIBUTES = new ArrayList();
         return velocityPdf.createPdf(FILE_NAME, TEMPLATE, dto);
     }
 
+    @Override
+    public Bilan save(Bilan bilan){
+        bilan=operationComptableAdminService.createBilan(bilan);
+        bilan.setTotalActifImmobolise(bilan.getImmobilisationsCorporelles().add(bilan.getImmobilisationsIncorporelles()).add(bilan.getImmobilisationsFinancieres()));
+        bilan.setTotalActifCirculant(bilan.getStocks().add(bilan.getCreancesClients()));
+        bilan.setTotalTresorieActif(bilan.getDepotEnBanque().add(bilan.getAvoirEnCaisse()));
+        bilan.setTotalFinnancementPermanant(bilan.getCapitalPersonnel().add(bilan.getEmprunts()).add(bilan.getResultat()));
+        bilan.setTotalPassifCirculant(bilan.getDettesFournisseurs().add(bilan.getAutresDettesCirculantes()));
+        bilan.setTotalActif(bilan.getTotalActifImmobolise().add(bilan.getTotalActifCirculant()).add(bilan.getTotalTresorieActif()));
+        bilan.setTotalPassif(bilan.getTotalFinnancementPermanant().add(bilan.getTotalPassifCirculant()));
+        return dao.save(bilan);
+    }
 
     public Bilan findByReferenceEntity(Bilan t){
         return  dao.findByRef(t.getRef());
@@ -93,6 +103,8 @@ public static final List<Attribute> ATTRIBUTES = new ArrayList();
         super.configure(Bilan.class,BilanHistory.class, BilanHistoryCriteria.class, BilanSpecification.class);
     }
 
+    @Autowired
+    private OperationComptableAdminService operationComptableAdminService ;
     @Autowired
     private SocieteAdminService societeService ;
     @Autowired

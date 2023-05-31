@@ -17,6 +17,7 @@ public class DateUtil {
     public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
     // public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
+    public static final String DATE_FORMAT_WITH_HOUR_fr = "dd/MM/yyyy HH:mm";
     public static final String DATE_FORMAT_NAME = "ddMMyyyyHHmmss";
     public final static String DATE_FORMAT_FILE = "yyMMddHHmmss";
     public static final String HOUR_FORMAT = "HH:mm:ss";
@@ -46,6 +47,12 @@ public class DateUtil {
 
     public static LocalDateTime stringEnToDate(final String strDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_ENG, Locale.ENGLISH);
+        return LocalDateTime.parse(strDate, formatter);
+
+    }
+
+    public static LocalDateTime stringToDateTimeIs(final String strDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR_fr, Locale.ENGLISH);
         return LocalDateTime.parse(strDate, formatter);
 
     }
@@ -132,11 +139,10 @@ public class DateUtil {
         return "";
     }
 
-/*
-    public static String dateTimeToString(final LocalDateTime date) {
+    public static String dateTimeToStringIs(final LocalDateTime date) {
         try {
             if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR_fr);
                 return date.format(formatter);
             }
         } catch (Exception e) {
@@ -144,7 +150,7 @@ public class DateUtil {
         }
         return null;
     }
-*/
+
     public static String dateTimeToString(final LocalDateTime date) {
         try {
             if (date != null) {

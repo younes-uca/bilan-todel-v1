@@ -32,9 +32,9 @@ public class TauxIsConverter extends AbstractConverter<TauxIs, TauxIsDto, TauxIs
             if(StringUtil.isNotEmpty(dto.getResultatMax()))
                 item.setResultatMax(dto.getResultatMax());
             if(StringUtil.isNotEmpty(dto.getDateApplicationMin()))
-                item.setDateApplicationMin(DateUtil.stringEnToDate(dto.getDateApplicationMin()));
+                item.setDateApplicationMin(DateUtil.stringToDateTimeIs(dto.getDateApplicationMin()));
             if(StringUtil.isNotEmpty(dto.getDateApplicationMax()))
-                item.setDateApplicationMax(DateUtil.stringEnToDate(dto.getDateApplicationMax()));
+                item.setDateApplicationMax(DateUtil.stringToDateTimeIs(dto.getDateApplicationMax()));
             if(StringUtil.isNotEmpty(dto.getPourcentage()))
                 item.setPourcentage(dto.getPourcentage());
 
@@ -56,9 +56,9 @@ public class TauxIsConverter extends AbstractConverter<TauxIs, TauxIsDto, TauxIs
             if(StringUtil.isNotEmpty(item.getResultatMax()))
                 dto.setResultatMax(item.getResultatMax());
             if(item.getDateApplicationMin()!=null)
-                dto.setDateApplicationMin(DateUtil.dateTimeToString(item.getDateApplicationMin()));
+                dto.setDateApplicationMin(DateUtil.dateTimeToStringIs(item.getDateApplicationMin()));
             if(item.getDateApplicationMax()!=null)
-                dto.setDateApplicationMax(DateUtil.dateTimeToString(item.getDateApplicationMax()));
+                dto.setDateApplicationMax(DateUtil.dateTimeToStringIs(item.getDateApplicationMax()));
             if(StringUtil.isNotEmpty(item.getPourcentage()))
                 dto.setPourcentage(item.getPourcentage());
 

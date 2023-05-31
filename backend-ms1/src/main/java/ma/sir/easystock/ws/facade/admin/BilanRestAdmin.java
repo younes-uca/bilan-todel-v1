@@ -4,16 +4,20 @@ package  ma.sir.easystock.ws.facade.admin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import ma.sir.easystock.bean.core.Bilan;
+import ma.sir.easystock.bean.core.DeclarationIs;
 import ma.sir.easystock.bean.history.BilanHistory;
 import ma.sir.easystock.dao.criteria.core.BilanCriteria;
 import ma.sir.easystock.dao.criteria.history.BilanHistoryCriteria;
 import ma.sir.easystock.service.facade.admin.BilanAdminService;
 import ma.sir.easystock.ws.converter.BilanConverter;
 import ma.sir.easystock.ws.dto.BilanDto;
+import ma.sir.easystock.ws.dto.DeclarationIsDto;
+import ma.sir.easystock.ws.dto.SocieteDto;
 import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,7 +78,14 @@ public class BilanRestAdmin  extends AbstractController<Bilan, BilanDto, BilanHi
     @ApiOperation("Saves the specified  bilan")
     @PostMapping("")
     public ResponseEntity<BilanDto> save(@RequestBody BilanDto dto) throws Exception {
-        return super.save(dto);
+        if(dto!=null){
+            converter.init(true);
+            Bilan item = converter.toItem(dto);
+            BilanDto bilanDto = converter.toDto(service.save(item));
+            return new ResponseEntity<>(bilanDto, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(dto, HttpStatus.NO_CONTENT);
+        }
     }
 
     @ApiOperation("Updates the specified  bilan")
