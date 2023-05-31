@@ -21,6 +21,7 @@ import ma.sir.easystock.zynerator.util.FileUtils;
 import ma.sir.easystock.zynerator.util.MD5Checksum;
 import ma.sir.easystock.zynerator.exception.BusinessRuleException;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -113,7 +114,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
                 }
             }
         }
-    return result;
+        return result;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -165,7 +166,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
     public T findById(Long id) {
-    Optional<T> item = dao.findById(id);
+        Optional<T> item = dao.findById(id);
         return item.orElse(null);
     }
 
@@ -194,7 +195,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
         List<T> list = new ArrayList<>();
         for (T t : items) {
             T founded = findByReferenceEntity(t);
-                if (founded == null) {
+            if (founded == null) {
                 findOrSaveAssociatedObject(t);
                 dao.save(t);
             } else {
@@ -232,7 +233,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
             for (T t : list) {
                 deleteAssociatedLists(t.getId());
                 dao.deleteById(t.getId()); // il fait find by id apres delete !!!
-            //constructAndSaveHistory(dto, ACTION_TYPE.DELETE); TO DO
+                //constructAndSaveHistory(dto, ACTION_TYPE.DELETE); TO DO
             }
         }
     }
@@ -275,7 +276,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
 
     public List<T> findAll() {
         return dao.findAll();
-        }
+    }
 
     public List<T> findAllOptimized() {
         return dao.findAll();
@@ -377,19 +378,19 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     private void addEtablissementConstraint(CRITERIA criteria) {
         Object userInfo = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userInfo instanceof User) {
-        User currentUser = (User) userInfo;
-        criteria.setEtablissementId(currentUser.getEtablissement() != null ? currentUser.getEtablissement().getId() : null);
+            User currentUser = (User) userInfo;
+            criteria.setEtablissementId(currentUser.getEtablissement() != null ? currentUser.getEtablissement().getId() : null);
         }
     }
 
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null && principal instanceof User) {
-        return (User) principal;
+            return (User) principal;
         } else if (principal != null && principal instanceof String) {
-        return userService.findByUsername(principal.toString());
+            return userService.findByUsername(principal.toString());
         } else {
-        return null;
+            return null;
         }
     }
 
@@ -400,7 +401,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
 
-    public String uploadFile(String checksumOld, String tempUpladedFile,String destinationFilePath) throws Exception {
+    public String uploadFile(String checksumOld, String tempUpladedFile, String destinationFilePath) throws Exception {
         String crName = null;
         if (FileUtils.isFileExist(UPLOADED_TEMP_FOLDER, tempUpladedFile)) {
             String filePath = destinationFilePath;
@@ -408,9 +409,9 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
                 return crName;
 
             String checksum = MD5Checksum.getMD5Checksum(UPLOADED_TEMP_FOLDER + tempUpladedFile);
-                if (!checksum.equals(checksumOld)) {
-                    throw new BusinessRuleException("errors.file.checksum", new String[]{tempUpladedFile});
-                }
+            if (!checksum.equals(checksumOld)) {
+                throw new BusinessRuleException("errors.file.checksum", new String[]{tempUpladedFile});
+            }
 
             crName = FileUtils.saveFile(UPLOADED_TEMP_FOLDER, UPLOADED_FOLDER, tempUpladedFile, filePath, "");
 
@@ -428,10 +429,9 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
 
     public List<T> importExcel(MultipartFile file) {
         if (isValidExcelFile(file)) {
-            Class<T> clazz = (Class<T>) getCallingClass();  // Get the class type dynamically
 
             try {
-                List<T> items = read(file.getInputStream(), clazz, getAttributes());
+                List<T> items = read(file.getInputStream(), getAttributes());
                 this.dao.saveAll(items);
                 return items;
             } catch (IOException e) {
@@ -440,6 +440,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
         }
         return null;
     }
+
 
     protected List<Attribute> getAttributes() {
         return new ArrayList<>();
@@ -450,35 +451,51 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
     // create a methode that reade the file and take an inputStream as object and return a liste of commandes
-    private List<T> read(InputStream inputStream, Class<T> clazz,List<Attribute> attributes) {
+    private List<T> read(InputStream inputStream, List<Attribute> attributes) {
         List<T> items = new ArrayList<>();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheetAt(0);
             int rowIndex;
-            for (rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-            Row row = sheet.getRow(rowIndex);
-            int cellIndex = 0;
-            T item = itemClass.getDeclaredConstructor().newInstance();
-            BeanWrapper beanWrapper = new BeanWrapperImpl(item);
-            Iterator<Cell> cellIterator = row.cellIterator();
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-                String type = attributes.get(cellIndex).getType();
-                Object value = null;
-                if (type.equals("String")) {
-                    value = cell.getStringCellValue();
-                } else if (type.equals("BigDecimal")) {
-                    value = BigDecimal.valueOf(cell.getNumericCellValue());
-                } else if (type.equals("Long")) {
-                    value = Long.valueOf(cell.getStringCellValue());
-                } else if (type.equals("Boolean")) {
-                    value = (cell.getBooleanCellValue());
+            int lastRowIndex = sheet.getLastRowNum();
+            for (rowIndex = 1; rowIndex <= lastRowIndex; rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                int cellIndex = 0;
+                T item = itemClass.getDeclaredConstructor().newInstance();
+                BeanWrapper beanWrapper = new BeanWrapperImpl(item);
+                Iterator<Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    String attributeName = attributes.get(cellIndex).getName();
+                    String type = attributes.get(cellIndex).getType();
+                    Class complexType = attributes.get(cellIndex).getComplexType();
+                    Object value = null;
+                    if (cell.getCellType() != CellType.BLANK) {
+
+
+                        if (type.equals("String")) {
+                            value = cell.getStringCellValue();
+                        } else if (type.equals("BigDecimal")) {
+                            value = BigDecimal.valueOf(cell.getNumericCellValue());
+                        } else if (type.equals("Long")) {
+                            value = Long.valueOf((long) cell.getNumericCellValue());
+                        } else if (type.equals("Boolean")) {
+                            value = (cell.getBooleanCellValue());
+                        }
+                    }
+
+                    if (complexType != null && value != null) {
+                        beanWrapper.setPropertyValue(attributeName.split("\\.")[0], complexType.getDeclaredConstructor().newInstance());
+                        beanWrapper.setPropertyValue(attributeName, value);
+                    } else if (complexType == null) {
+                        beanWrapper.setPropertyValue(attributes.get(cellIndex).getName(), value);
+
+                    }
+                    cellIndex++;
                 }
-                beanWrapper.setPropertyValue(attributes.get(cellIndex).getName(), value);
-                cellIndex++;
-                }
+
                 items.add(item);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

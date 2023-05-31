@@ -9,7 +9,20 @@
                     <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
-                    <div class="flex">
+                    <div class="flex" style="align-items: center">
+                        <div class="upload-container">
+                            <label for="file-upload" class="file-upload-label">
+                                <span class="upload-text">Choose file</span>
+                            </label>
+                            <input id="file-upload" type="file" (change)="onExcelFileSelected($event)" accept=".xlsx, .xls" style="display: none;">
+
+                            <p-button  (click)="importExcel()"  label=" {{'import' | translate}}"  [disabled]="!excelFile"  icon="pi pi-upload"></p-button>
+
+
+
+
+
+                        </div>
                         <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
                     </div>
                 </ng-template>

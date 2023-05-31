@@ -14,6 +14,7 @@ import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,18 @@ import ma.sir.easystock.zynerator.dto.FileTempDto;
 @RequestMapping("/api/admin/declarationTva/")
 public class DeclarationTvaRestAdmin  extends AbstractController<DeclarationTva, DeclarationTvaDto, DeclarationTvaHistory, DeclarationTvaCriteria, DeclarationTvaHistoryCriteria, DeclarationTvaAdminService, DeclarationTvaConverter> {
 
-
+    @ApiOperation("Saves the specified  declarationTva")
+    @PostMapping("simuler/{simuler}")
+    public ResponseEntity<DeclarationTvaDto> save(@PathVariable boolean simuler,@RequestBody DeclarationTvaDto declarationTvaDto) throws Exception {
+        if(declarationTvaDto!=null){
+            converter.init(true);
+            DeclarationTva item = converter.toItem(declarationTvaDto);
+            DeclarationTvaDto tvaDto = converter.toDto(service.save(simuler,item));
+            return  new ResponseEntity<>(tvaDto, HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<>(declarationTvaDto, HttpStatus.NO_CONTENT);
+        }
+    }
 
     @ApiOperation("Exporte pdf")
     @PostMapping("exportPdf/")

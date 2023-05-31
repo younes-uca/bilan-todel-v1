@@ -17,12 +17,47 @@ export class TauxRetardTvaCreateAdminComponent extends AbstractCreateController<
     constructor( private tauxRetardTvaService: TauxRetardTvaService ) {
         super(tauxRetardTvaService);
     }
-
     ngOnInit(): void {
-}
+
+    }
+    public save(): void{
+        this.tauxRetardTvaService.save().subscribe(data =>{
+            if (data != null){
+                this.items.push({...data})
+                this.item = this.tauxRetardTvaService.constrcutDto();
+                this.createDialog = false;
+                alert('SAVE SUCCESS');
+            }else {
+                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+
+                alert('SAVE ERROR')
+            }
+
+        })
+    }
 
 
 
+
+
+    get tauxRetardTva(): TauxRetardTvaDto {
+
+        return this.tauxRetardTvaService.tauxRetardTva;
+    }
+
+    set tauxRetardTva(value: TauxRetardTvaDto) {
+        this.tauxRetardTvaService.tauxRetardTva = value;
+    }
+
+    get tauxRetardTvas(): Array<TauxRetardTvaDto> {
+
+
+        return this.tauxRetardTvaService.tauxRetardTvas;;
+    }
+
+    set tauxRetardTvas(value: Array<TauxRetardTvaDto>) {
+        this.tauxRetardTvaService.tauxRetardTvas = value;
+    }
 
 
     public setValidation(value: boolean){

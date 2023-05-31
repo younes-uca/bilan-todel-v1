@@ -18,10 +18,15 @@ import {AbstractService} from 'src/app/zynerator/service/AbstractService';
   providedIn: 'root'
 })
 export class TauxRetardTvaService extends AbstractService<TauxRetardTvaDto, TauxRetardTvaCriteria> {
+    private _tauxRetardTva: TauxRetardTvaDto;
+    private _tauxRetardTvas: Array<TauxRetardTvaDto>;
      constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/tauxRetardTva/');
+    }
+    public save(): Observable<TauxRetardTvaDto> {
+        return this.http.post<TauxRetardTvaDto>(this.API, this.item)
     }
 
     public constrcutDto(): TauxRetardTvaDto {
@@ -30,5 +35,27 @@ export class TauxRetardTvaService extends AbstractService<TauxRetardTvaDto, Taux
 
     public constrcutCriteria(): TauxRetardTvaCriteria {
         return new TauxRetardTvaCriteria();
+    }
+    get tauxRetardTva(): TauxRetardTvaDto {
+        if (this._tauxRetardTva == null) {
+            this._tauxRetardTva = new TauxRetardTvaDto();
+        }
+        return this._tauxRetardTva;
+    }
+
+    set tauxRetardTva(value: TauxRetardTvaDto) {
+        this._tauxRetardTva = value;
+    }
+
+    get tauxRetardTvas(): Array<TauxRetardTvaDto> {
+        if (this._tauxRetardTvas == null) {
+            this._tauxRetardTvas = new Array<TauxRetardTvaDto>();
+        }
+
+        return this._tauxRetardTvas;
+    }
+
+    set tauxRetardTvas(value: Array<TauxRetardTvaDto>) {
+        this._tauxRetardTvas = value;
     }
 }

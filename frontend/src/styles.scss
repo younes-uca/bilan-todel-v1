@@ -240,4 +240,46 @@ $gutter: 1rem; //for primeflex grid system
   }
 
 }
+.file-upload-label {
+  display: inline-block;
+  font-size: 1em;
+  padding: 2px;
+  padding-left: 5px;
+  padding-bottom: 4px;
+  padding-right: 5px;
+  margin-right: 50px;
+  border: 1px solid #171717;
+  cursor: pointer;
+  background-color: white;
+  color: #171717;
+  border-radius: 5px;
+}
+
+
+
+.upload-container{
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 10px;
+
+}
+
+.upload-button{
+  cursor: pointer;
+  float: right;
+  weight: 300px;
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: #4b4ad1;
+  border: solid 2px #4b4ad1;
+  color: white;
+  margine-left:10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 

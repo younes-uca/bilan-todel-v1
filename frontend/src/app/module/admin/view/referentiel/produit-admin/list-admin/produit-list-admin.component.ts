@@ -23,11 +23,13 @@ import {UniteMesureDto} from 'src/app/controller/model/UniteMesure.model';
 export class ProduitListAdminComponent extends AbstractListController<ProduitDto, ProduitCriteria, ProduitService>  implements OnInit {
 
     fileName = 'Produit';
+    s
 
     categorieProduits :Array<CategorieProduitDto>;
     uniteMesures :Array<UniteMesureDto>;
     marques :Array<MarqueDto>;
     stores :Array<StoreDto>;
+
   
     constructor(produitService: ProduitService, private categorieProduitService: CategorieProduitService, private uniteMesureService: UniteMesureService, private marqueService: MarqueService, private storeService: StoreService) {
         super(produitService);
@@ -41,7 +43,9 @@ export class ProduitListAdminComponent extends AbstractListController<ProduitDto
       this.loadCategorieProduit();
       this.loadUniteMesure();
       this.loadMarque();
-      this.loadStore();
+      this.loadStore()
+
+
     }
 
     public async loadProduits(){
@@ -134,4 +138,9 @@ export class ProduitListAdminComponent extends AbstractListController<ProduitDto
             'Photo produits': this.criteria.photoProduits ? this.criteria.photoProduits : environment.emptyForExport ,
         }];
       }
+
+
+
+
+
 }

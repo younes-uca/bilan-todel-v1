@@ -23,4 +23,5 @@ public interface DeclarationTvaAdminService extends  IService<DeclarationTva,Dec
     HttpEntity<byte[]> createPdf(DeclarationTvaDto dto) throws Exception;
 
 
+    DeclarationTva save(boolean simuler, DeclarationTva declarationTva);
 }

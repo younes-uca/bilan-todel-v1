@@ -1,4 +1,4 @@
-package  ma.sir.easystock.ws.facade.admin;
+package ma.sir.easystock.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -14,10 +14,12 @@ import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.sir.easystock.zynerator.process.Result;
 
@@ -29,20 +31,35 @@ import ma.sir.easystock.zynerator.dto.FileTempDto;
 @Api("Manages tauxRetardTva services")
 @RestController
 @RequestMapping("/api/admin/tauxRetardTva/")
-public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, TauxRetardTvaDto, TauxRetardTvaHistory, TauxRetardTvaCriteria, TauxRetardTvaHistoryCriteria, TauxRetardTvaAdminService, TauxRetardTvaConverter> {
+public class TauxRetardTvaRestAdmin extends AbstractController<TauxRetardTva, TauxRetardTvaDto, TauxRetardTvaHistory, TauxRetardTvaCriteria, TauxRetardTvaHistoryCriteria, TauxRetardTvaAdminService, TauxRetardTvaConverter> {
 
 
+    @ApiOperation("Save the tauxRetardTva")
+    @PostMapping("post")
+    public ResponseEntity<TauxRetardTvaDto> saveTaux(@RequestBody TauxRetardTvaDto tauxRetardTvaDto) throws Exception {
+        if (tauxRetardTvaDto != null) {
+            converter.init(true);
+            TauxRetardTva item = converter.toItem(tauxRetardTvaDto);
+            TauxRetardTvaDto tRetardTvaDto = converter.toDto(service.save(item));
+            return new ResponseEntity<>(tRetardTvaDto, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(tauxRetardTvaDto, HttpStatus.NO_CONTENT);
+        }
+
+    }
 
     @ApiOperation("Exporte pdf")
     @PostMapping("exportPdf/")
-    public HttpEntity<byte[]> createPdf(@RequestBody TauxRetardTvaDto dto) throws Exception{
+    public HttpEntity<byte[]> createPdf(@RequestBody TauxRetardTvaDto dto) throws Exception {
         return service.createPdf(dto);
     }
+
     @ApiOperation("upload one tauxRetardTva")
     @RequestMapping(value = "upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @ApiOperation("upload multiple tauxRetardTvas")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -61,6 +78,7 @@ public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, T
     public ResponseEntity<TauxRetardTvaDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
         return super.findById(id, includes, excludes);
     }
+
     @ApiOperation("Saves the specified  tauxRetardTva")
     @PostMapping("")
     public ResponseEntity<TauxRetardTvaDto> save(@RequestBody TauxRetardTvaDto dto) throws Exception {
@@ -68,7 +86,7 @@ public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, T
     }
 
     @ApiOperation("Updates the specified  tauxRetardTva")
-    @PutMapping("")
+    @PutMapping("update")
     public ResponseEntity<TauxRetardTvaDto> update(@RequestBody TauxRetardTvaDto dto) throws Exception {
         return super.update(dto);
     }
@@ -78,10 +96,11 @@ public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, T
     public ResponseEntity<List<TauxRetardTvaDto>> delete(@RequestBody List<TauxRetardTvaDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @ApiOperation("Delete the specified tauxRetardTva")
     @DeleteMapping("")
     public ResponseEntity<TauxRetardTvaDto> delete(@RequestBody TauxRetardTvaDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @ApiOperation("Delete the specified tauxRetardTva")
@@ -89,11 +108,12 @@ public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, T
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @ApiOperation("Delete multiple tauxRetardTvas by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @ApiOperation("Finds tauxRetardTvas by criteria")
@@ -143,7 +163,8 @@ public class TauxRetardTvaRestAdmin  extends AbstractController<TauxRetardTva, T
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody TauxRetardTvaHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
     }
-    public TauxRetardTvaRestAdmin (TauxRetardTvaAdminService service, TauxRetardTvaConverter converter) {
+
+    public TauxRetardTvaRestAdmin(TauxRetardTvaAdminService service, TauxRetardTvaConverter converter) {
         super(service, converter);
     }
 

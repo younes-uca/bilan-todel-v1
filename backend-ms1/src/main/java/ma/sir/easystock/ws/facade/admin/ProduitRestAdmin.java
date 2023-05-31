@@ -34,7 +34,7 @@ import ma.sir.easystock.zynerator.dto.FileTempDto;
 public class ProduitRestAdmin  extends AbstractController<Produit, ProduitDto, ProduitHistory, ProduitCriteria, ProduitHistoryCriteria, ProduitAdminService, ProduitConverter> {
 
 
-    @PostMapping("import")
+    @PostMapping("import-excel")
     public ResponseEntity<?> uploadProduitsData(@RequestParam("file") MultipartFile file){
         this.service.importExcel(file);
         return ResponseEntity.ok(Map.of("Message" , " Produits data uploaded and saved to database successfully"));

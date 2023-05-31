@@ -1,5 +1,6 @@
 package ma.sir.easystock.service.facade.admin;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import ma.sir.easystock.bean.core.TauxRetardTva;
 import ma.sir.easystock.dao.criteria.core.TauxRetardTvaCriteria;
@@ -15,4 +16,9 @@ public interface TauxRetardTvaAdminService extends  IService<TauxRetardTva,TauxR
     HttpEntity<byte[]> createPdf(TauxRetardTvaDto dto) throws Exception;
 
 
+    TauxRetardTva save(TauxRetardTva tauxRetardTva);
+
+    TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(int annee, int trimestre);
+
+    TauxRetardTva findByDateApplicationMax(LocalDateTime date);
 }

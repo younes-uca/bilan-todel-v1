@@ -1,5 +1,6 @@
 package ma.sir.easystock.service.impl.admin;
 
+import ma.sir.easystock.bean.core.CategorieProduit;
 import ma.sir.easystock.bean.core.Produit;
 import ma.sir.easystock.bean.history.ProduitHistory;
 import ma.sir.easystock.dao.criteria.core.ProduitCriteria;
@@ -47,6 +48,17 @@ ProduitHistoryDao> implements ProduitAdminService {
     @Override
     public List<Produit> importExcel(MultipartFile file) {
         return super.importExcel(file);
+    }
+
+    @Override
+    protected List<Attribute> getAttributes() {
+        List<Attribute> attributes = new ArrayList<>();
+        attributes.add(new Attribute("reference", "String"));
+        attributes.add(new Attribute("libelle", "String"));
+        attributes.add(new Attribute("categorieProduit.id", "Long", CategorieProduit.class));
+
+        return attributes;
+
     }
 
     public Produit findByReferenceEntity(Produit t){

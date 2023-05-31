@@ -9,9 +9,9 @@ import ma.sir.easystock.dao.facade.history.TauxRetardTvaHistoryDao;
 import ma.sir.easystock.dao.specification.core.TauxRetardTvaSpecification;
 import ma.sir.easystock.service.facade.admin.TauxRetardTvaAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
-import ma.sir.easystock.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.time.LocalDateTime;
 
 import ma.sir.easystock.zynerator.util.VelocityPdf;
 import ma.sir.easystock.ws.dto.TauxRetardTvaDto;
@@ -19,29 +19,48 @@ import org.springframework.http.HttpEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-
-import java.util.List;
 @Service
-public class TauxRetardTvaAdminServiceImpl extends AbstractServiceImpl<TauxRetardTva,TauxRetardTvaHistory, TauxRetardTvaCriteria, TauxRetardTvaHistoryCriteria, TauxRetardTvaDao,
-TauxRetardTvaHistoryDao> implements TauxRetardTvaAdminService {
+public class TauxRetardTvaAdminServiceImpl extends AbstractServiceImpl<TauxRetardTva, TauxRetardTvaHistory, TauxRetardTvaCriteria, TauxRetardTvaHistoryCriteria, TauxRetardTvaDao,
+        TauxRetardTvaHistoryDao> implements TauxRetardTvaAdminService {
     public static final String TEMPLATE = "template/tauxRetardTva.vm";
     public static final String FILE_NAME = "tauxRetardTva.pdf";
 
     @Override
-    public HttpEntity<byte[]> createPdf(TauxRetardTvaDto dto) throws Exception{
+    public HttpEntity<byte[]> createPdf(TauxRetardTvaDto dto) throws Exception {
         return velocityPdf.createPdf(FILE_NAME, TEMPLATE, dto);
     }
 
+    @Override
+    public TauxRetardTva save(TauxRetardTva tauxRetardTva) {
+
+        TauxRetardTva ancienTauxRetardTva = findByDateApplicationMax(null);
+        if (ancienTauxRetardTva == null) {
+            tauxRetardTva.setDateApplicationMax(null);
+            tauxRetardTva.setDateApplicationMin(LocalDateTime.now());
+        } else {
+
+            ancienTauxRetardTva.setDateApplicationMax(LocalDateTime.now());
+            tauxRetardTva.setDateApplicationMin(LocalDateTime.now());
+            tauxRetardTva.setDateApplicationMax(null);
 
 
+        }
+        return dao.save(tauxRetardTva);
+    }
 
+    @Override
+    public TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(int annee, int trimestre) {
+        return dao.findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(annee, trimestre);
+    }
 
+    @Override
+    public TauxRetardTva findByDateApplicationMax(LocalDateTime date) {
+        return dao.findByDateApplicationMax(date);
+    }
 
 
     public void configure() {
-        super.configure(TauxRetardTva.class,TauxRetardTvaHistory.class, TauxRetardTvaHistoryCriteria.class, TauxRetardTvaSpecification.class);
+        super.configure(TauxRetardTva.class, TauxRetardTvaHistory.class, TauxRetardTvaHistoryCriteria.class, TauxRetardTvaSpecification.class);
     }
 
     @Autowired
