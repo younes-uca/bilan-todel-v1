@@ -1,5 +1,6 @@
 package ma.sir.easystock.service.impl.admin;
 
+import ma.sir.easystock.bean.core.Bilan;
 import ma.sir.easystock.bean.core.OperationComptable;
 import ma.sir.easystock.bean.history.OperationComptableHistory;
 import ma.sir.easystock.dao.criteria.core.OperationComptableCriteria;
@@ -10,9 +11,11 @@ import ma.sir.easystock.dao.specification.core.OperationComptableSpecification;
 import ma.sir.easystock.service.facade.admin.OperationComptableAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
 import ma.sir.easystock.zynerator.service.Attribute;
-import ma.sir.easystock.zynerator.util.ListUtil;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,6 @@ import ma.sir.easystock.service.facade.admin.EtatOperationComptableAdminService 
 import ma.sir.easystock.service.facade.admin.TypeOperationComptableAdminService ;
 import ma.sir.easystock.service.facade.admin.CompteComptableAdminService ;
 
-
-import java.util.List;
 @Service
 public class OperationComptableAdminServiceImpl extends AbstractServiceImpl<OperationComptable,OperationComptableHistory, OperationComptableCriteria, OperationComptableHistoryCriteria, OperationComptableDao,
 OperationComptableHistoryDao> implements OperationComptableAdminService {
@@ -44,12 +45,38 @@ public static final List<Attribute> ATTRIBUTES = new ArrayList();
     ATTRIBUTES.add(new Attribute("montant","BigDecimal"));
     }
 
+
     @Override
     public HttpEntity<byte[]> createPdf(OperationComptableDto dto) throws Exception{
         return velocityPdf.createPdf(FILE_NAME, TEMPLATE, dto);
     }
 
 
+
+    @Override
+    public Bilan createBilan(Bilan bilan){
+        List<OperationComptable> list;
+        String[] listCompte= {"immobilisationsIncorporelles", "immobilisationsCorporelles", "immobilisationsFinancieres", "stocks", "creancesClients", "depotEnBanque", "avoirEnCaisse", "capitalPersonnel", "emprunts", "resultat", "dettesFournisseurs", "autresDettesCirculantes"};
+        BeanWrapper beanWrapper = new BeanWrapperImpl(bilan);
+        for(String compte : listCompte){
+          BigDecimal value=BigDecimal.ZERO;
+          list=this.findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(bilan.getSociete().getId(), bilan.getAnnee(),compte,"valide");
+          if(list!=null){
+              for(OperationComptable item : list ){
+                  if(item.getTypeOperationComptable().getLibelle()=="credit"){
+                      value=value.subtract(item.getMontant());
+                  }else value=value.add(item.getMontant());
+              }
+              beanWrapper.setPropertyValue(compte, value);
+          }
+        }
+        return bilan;
+    }
+
+
+    List<OperationComptable> findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(Long id,int annee,String compteLibelle, String etatLibelle){
+        return dao.findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(id,annee,compteLibelle,etatLibelle);
+    };
 
     public List<OperationComptable> findBySocieteId(Long id){
         return dao.findBySocieteId(id);

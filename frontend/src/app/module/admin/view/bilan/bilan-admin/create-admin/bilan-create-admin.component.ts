@@ -34,6 +34,17 @@ export class BilanCreateAdminComponent extends AbstractCreateController<BilanDto
 }
 
 
+    public save():void{
+        this.service.save().subscribe(data =>{
+                if(data != null) {
+                    this.service.items.push({...data}) ;
+                    this.item= this.service.constrcutDto();
+                    this.createDialog = false;
+                }else this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
+            }
+        )
+    }
+
 
 
 

@@ -204,15 +204,16 @@
                                 <p-sortIcon field="resultatAvantImpot"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
-                        <th pSortableColumn="tauxIs">
+
+
+                        <th pSortableColumn="resultatApresImpot">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Taux is' | translate}}</span>
-                                <p-sortIcon field="tauxIs"></p-sortIcon>
+                                <span>{{'Resultat apres impot' | translate}}</span>
+                                <p-sortIcon field="resultatApresImpot"></p-sortIcon>
                             </div>
                         </th>
                                 
+
                                 <!-- 
                         <th pSortableColumn="montantImpot">
                             <div class="p-d-flex p-jc-between p-ai-center">
@@ -222,10 +223,10 @@
                         </th>
                                 --> 
                                 <!-- 
-                        <th pSortableColumn="resultatApresImpot">
+                        <th pSortableColumn="tauxIs">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Resultat apres impot' | translate}}</span>
-                                <p-sortIcon field="resultatApresImpot"></p-sortIcon>
+                                <span>{{'Taux is' | translate}}</span>
+                                <p-sortIcon field="tauxIs"></p-sortIcon>
                             </div>
                         </th>
                                 --> 
@@ -257,7 +258,7 @@
                         <td>{{element.reference}}</td>
                             
                             
-                        <td>{{element.dateDeclaration | date :'dd/MM/yyyy HH:mm' }}</td>
+                        <td>{{element.dateDeclaration}}</td>
                             
                             
                         <td>{{element.trimistre}}</td>
@@ -276,15 +277,15 @@
                             
                             
                         <td>{{element.resultatAvantImpot}}</td>
-                            
-                            
-                        <td>{{element.tauxIs?.id}}</td>
-                            
+
+
+                        <td>{{element.resultatApresImpot}}</td>
+
                              <!-- 
                         <td>{{element.montantImpot}}</td>
                              --> 
                              <!-- 
-                        <td>{{element.resultatApresImpot}}</td>
+                        <td>{{element.tauxIs?.id}}</td>
                              --> 
                              <!-- 
                         <td>{{element.comptableTraitant?.cin}}</td>
@@ -296,7 +297,7 @@
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
-                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"></button>
                             <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-secondary" (click)="exportPdf(element)"></button>
                         </td>
                     </tr>

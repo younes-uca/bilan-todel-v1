@@ -63,8 +63,6 @@ public class Bilan   extends AuditBusinessObject     {
     }
 
 
-
-
     @Id
     @Column(name = "id")
         @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="bilan_seq")

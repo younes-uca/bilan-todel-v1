@@ -20,10 +20,15 @@ import {EtatBilanDto} from '../model/EtatBilan.model';
   providedIn: 'root'
 })
 export class BilanService extends AbstractService<BilanDto, BilanCriteria> {
+
      constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/bilan/');
+    }
+
+    public save(): Observable<BilanDto> {
+        return this.http.post<BilanDto>(this.API, this.item);
     }
 
     public constrcutDto(): BilanDto {

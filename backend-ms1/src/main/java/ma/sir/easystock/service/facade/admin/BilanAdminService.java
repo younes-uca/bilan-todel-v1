@@ -11,6 +11,10 @@ import org.springframework.http.HttpEntity;
 
 public interface BilanAdminService extends  IService<Bilan,BilanCriteria, BilanHistoryCriteria>  {
 
+
+
+    Bilan save(Bilan bilan);
+
     List<Bilan> findBySocieteId(Long id);
     int deleteBySocieteId(Long id);
     List<Bilan> findByEtatBilanId(Long id);
