@@ -2,6 +2,7 @@ package ma.sir.easystock.service.impl.admin;
 
 import ma.sir.easystock.bean.core.Bilan;
 import ma.sir.easystock.bean.core.OperationComptable;
+import ma.sir.easystock.bean.core.TypeOperationComptable;
 import ma.sir.easystock.bean.history.OperationComptableHistory;
 import ma.sir.easystock.dao.criteria.core.OperationComptableCriteria;
 import ma.sir.easystock.dao.criteria.history.OperationComptableHistoryCriteria;
@@ -30,6 +31,7 @@ import ma.sir.easystock.service.facade.admin.SocieteAdminService ;
 import ma.sir.easystock.service.facade.admin.EtatOperationComptableAdminService ;
 import ma.sir.easystock.service.facade.admin.TypeOperationComptableAdminService ;
 import ma.sir.easystock.service.facade.admin.CompteComptableAdminService ;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OperationComptableAdminServiceImpl extends AbstractServiceImpl<OperationComptable,OperationComptableHistory, OperationComptableCriteria, OperationComptableHistoryCriteria, OperationComptableDao,
@@ -63,7 +65,8 @@ public static final List<Attribute> ATTRIBUTES = new ArrayList();
           list=this.findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(bilan.getSociete().getId(), bilan.getAnnee(),compte,"valide");
           if(list!=null){
               for(OperationComptable item : list ){
-                  if(item.getTypeOperationComptable().getLibelle()=="credit"){
+                  TypeOperationComptable type=item.getTypeOperationComptable();
+                  if(type.getLibelle().equals("credit")){
                       value=value.subtract(item.getMontant());
                   }else value=value.add(item.getMontant());
               }
@@ -72,6 +75,8 @@ public static final List<Attribute> ATTRIBUTES = new ArrayList();
         }
         return bilan;
     }
+
+
 
 
     List<OperationComptable> findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(Long id,int annee,String compteLibelle, String etatLibelle){

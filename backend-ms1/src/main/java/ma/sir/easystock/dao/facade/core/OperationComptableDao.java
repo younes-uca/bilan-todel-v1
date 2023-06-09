@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface OperationComptableDao extends AbstractRepository<OperationComptable,Long>  {
 
+    List<OperationComptable> findByCompteComptableSousClassComptableClassComptableCodeAndAnneeAndSocieteIce(String code,int annee,String ice);
+
     List<OperationComptable> findBySocieteIdAndAnneeAndCompteComptableLibelleAndEtatOperationComptableLibelle(Long id,int annee,String compteLibelle, String etatLibelle);
 
     List<OperationComptable> findBySocieteId(Long id);
