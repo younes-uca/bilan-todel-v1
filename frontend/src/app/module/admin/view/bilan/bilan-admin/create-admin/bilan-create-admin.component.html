@@ -5,31 +5,31 @@
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-3">
-                                                    <label for="1">{{'bilanRef' | translate}}<span style="color: red;">*</span></label>
-                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'bilanRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                    <label for="1">{{'Réf'}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Réf'}}" id="1" [(ngModel)]="item.ref"
                                                             [ngClass]="{'ng-invalid ng-dirty' : !validBilanRef}"  />
-                                                    <small class='p-error' *ngIf='!validBilanRef'>Ref est obligatoire.</small>
+                                                    <small class='p-error' *ngIf='!validBilanRef'>Réf est obligatoire.</small>
                                                 </div>
 
                                                 <div class="field col-11 md:col-2">
-                                                    <label for="3">{{'bilanSociete' | translate}}</label>
+                                                    <label for="3">{{'Société'}}</label>
                                                     <p-dropdown  appendTo="body"  [options]="societes" [(ngModel)]="item.societe" id="3" [filter]="true" filterMatchMode="contains"
-                                                                 [showClear]="true" optionLabel="ice" placeholder="{{'bilanSociete' | translate}}"  >
+                                                                 [showClear]="true" optionLabel="ice" placeholder="{{'Société'}}"  >
                                                     </p-dropdown>
 
                                                 </div>
 
                                                 <div class="field col-12 md:col-3">
-                                                    <label for="2">{{'bilanAnnee' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'bilanAnnee' | translate}}" [(ngModel)]="item.annee"  >
+                                                    <label for="2">{{'Année'}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'Année'}}" [(ngModel)]="item.annee"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                             <div class="field col-11 md:col-2">
-                                                <label for="23">{{'bilanEtatBilan' | translate}}</label>
+                                                <label for="23">{{'Etat Bilan'}}</label>
                                                 <p-dropdown  appendTo="body"  [options]="etatBilans" [(ngModel)]="item.etatBilan" id="23" [filter]="true" filterMatchMode="contains"
-                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'bilanEtatBilan' | translate}}"  >
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'Etat Bilan'}}"  >
                                                 </p-dropdown>
                                                 
                                             </div>
@@ -47,10 +47,10 @@
             <ng-template pTemplate="footer" >
                 <div class="grid-step">
                         <div style="margin-left: auto;">
-                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                            <button pButton pRipple  label="{{'valider' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
                         </div>
                         <div>
-                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                            <button pButton pRipple  label="{{'annuler' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                         </div>
 
                 </div>

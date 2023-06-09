@@ -1,19 +1,19 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'tauxIsTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'taux IS'}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
                         <p-tabView>
-                            <p-tabPanel header="{{'tauxIsTabPan' | translate}}">
+                            <p-tabPanel header="{{'taux IS'}}">
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
-                                                    <label for="1">{{'tauxIsResultatMin' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="1" placeholder="{{'tauxIsResultatMin' | translate}}" [(ngModel)]="item.resultatMin"  >
+                                                    <label for="1">{{'Résultat Min'}}(DH)</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="1" placeholder="{{'Résultat Min'}}" [(ngModel)]="item.resultatMin"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                                 <div class="field col-12 md:col-6">
-                                                    <label for="2">{{'tauxIsResultatMax' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'tauxIsResultatMax' | translate}}" [(ngModel)]="item.resultatMax"  >
+                                                    <label for="2">{{'Résultat Max'}}(DH)</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'Résultat Max'}}" [(ngModel)]="item.resultatMax"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
@@ -35,10 +35,10 @@
             <ng-template pTemplate="footer" >
                 <div class="grid-step">
                         <div style="margin-left: auto;">
-                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                            <button pButton pRipple  label="{{'valider'}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
                         </div>
                         <div>
-                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                            <button pButton pRipple  label="{{'annuler'}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                         </div>
 
                 </div>
