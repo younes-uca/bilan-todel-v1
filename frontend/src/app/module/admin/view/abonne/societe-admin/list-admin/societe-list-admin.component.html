@@ -4,15 +4,11 @@
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Societe')"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                                        <button pButton pRipple label=" {{'nouveau'}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Societe')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'supprimer'}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'chercher'}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
-                <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
-                    </div>
-                </ng-template>
+
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
@@ -20,19 +16,19 @@
                 <div class="align-form-search">
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.iceLike">
-                            <label for="1">{{'Ice' | translate}}</label>
+                            <label for="1">{{'ICE' | translate}}</label>
                         </span>
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <input class="mr-2" pInputText id="2" type="text"  [(ngModel)]="criteria.siegeLike">
-                            <label for="2">{{'Siege' | translate}}</label>
+                            <label for="2">{{'Siége'}}</label>
                         </span>
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.dernierAnneePayerIsMin" id="3-1"></p-inputNumber>
-                            <label for="3-1">{{'Dernier annee payer is' | translate}} Min</label>
+                            <label for="3-1">{{'Dérnière année payée IS'}} Min</label>
                         </span>
                        <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.dernierAnneePayerIsMax" id="3-2"></p-inputNumber>
-                            <label for="3-2">{{'Dernier annee payer is' | translate}} Max</label>
+                            <label for="3-2">{{'Dérnière année payée IS'}} Max</label>
                        </span>
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.dernierTrimestrePayerIsMin" id="4-1"></p-inputNumber>
@@ -83,10 +79,10 @@
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column flex-row justify-content-between table-header">
-                        <h5 class="p-m-0">{{'societeHeader' | translate}}</h5>
+                        <h5 class="p-m-0">{{'Liste des sociétés'}}</h5>
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input pInputText type="text" placeholder="{{'chercher'}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                     </div>
                 </ng-template>
@@ -98,7 +94,7 @@
                                 
                         <th pSortableColumn="ice">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Ice' | translate}}</span>
+                                <span>{{'ICE'}}</span>
                                 <p-sortIcon field="ice"></p-sortIcon>
                                 <p-columnFilter type="text" field="element.ice" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
@@ -107,7 +103,7 @@
                                 
                         <th pSortableColumn="siege">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Siege' | translate}}</span>
+                                <span>{{'Siége'}}</span>
                                 <p-sortIcon field="siege"></p-sortIcon>
                                 <p-columnFilter type="text" field="element.siege" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
@@ -116,7 +112,7 @@
                                 
                         <th pSortableColumn="dernierAnneePayerIs">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Dernier annee payer is' | translate}}</span>
+                                <span>{{'Dernière année payée IS'}}</span>
                                 <p-sortIcon field="dernierAnneePayerIs"></p-sortIcon>
                             </div>
                         </th>
@@ -124,7 +120,7 @@
                                 
                         <th pSortableColumn="dernierTrimestrePayerIs">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Dernier trimestre payer is' | translate}}</span>
+                                <span>{{'Dernier trimestre payé IS'}}</span>
                                 <p-sortIcon field="dernierTrimestrePayerIs"></p-sortIcon>
                             </div>
                         </th>
@@ -132,7 +128,7 @@
                                 
                         <th pSortableColumn="dernierAnneePayerTva">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Dernier annee payer tva' | translate}}</span>
+                                <span>{{'Dernière année payée TVA'}}</span>
                                 <p-sortIcon field="dernierAnneePayerTva"></p-sortIcon>
                             </div>
                         </th>
@@ -140,23 +136,16 @@
                                 
                         <th pSortableColumn="dernierTrimestrePayerTva">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Dernier trimestre payer tva' | translate}}</span>
+                                <span>{{'Dernier trimestre payée TVA'}}</span>
                                 <p-sortIcon field="dernierTrimestrePayerTva"></p-sortIcon>
                             </div>
                         </th>
-                                
-                                
-                        <th pSortableColumn="bloqued">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Bloqued' | translate}}</span>
-                                <p-sortIcon field="bloqued"></p-sortIcon>
-                            </div>
-                        </th>
+
                                 
                                 
                         <th pSortableColumn="abonne">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Abonne' | translate}}</span>
+                                <span>{{'Abonné'}}</span>
                                 <p-sortIcon field="abonne"></p-sortIcon>
                             </div>
                         </th>
@@ -186,12 +175,7 @@
                             
                             
                         <td>{{element.dernierTrimestrePayerTva}}</td>
-                            
-                            
-                        <td><i *ngIf="element.bloqued" class="pi pi-check checked-toogle"></i>
-                            <i *ngIf="!element.bloqued" class="pi pi-times unchecked-toogle"></i>
-                        </td>
-                            
+
                             
                         <td>{{element.abonne?.code}}</td>
                             
@@ -199,8 +183,6 @@
                             <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
-                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"></button>
-                            <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-secondary" (click)="exportPdf(element)"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -208,7 +190,7 @@
                 <ng-template pTemplate="summary">
                     <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
                     <div class="p-d-flex p-ai-center p-jc-between">
-                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'societe' : 'societes' : 0 }}.
+                        En total il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'société' : 'sociétés' : 0 }}.
                     </div>
                 </ng-template>
             </p-table>

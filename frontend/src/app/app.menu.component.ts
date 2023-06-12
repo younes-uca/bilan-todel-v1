@@ -76,71 +76,68 @@ export class AppMenuComponent implements OnInit {
 
 
               {
-                label: 'Referentiel Bilan',
+                label: 'Référentiel Bilan',
                 icon: 'pi pi-wallet',
                 items:[
                     {
-                      label: 'Liste type operation comptable',
+                      label: 'Liste des types d\'opération comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/type-operation-comptable/list']
                     },
                     {
-                      label: 'Liste sous class comptable',
+                      label: 'Liste des sous class comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/sous-class-comptable/list']
                     },
                     {
-                      label: 'Liste class comptable',
+                      label: 'Liste des class comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/class-comptable/list']
                     },
                     {
-                      label: 'Liste etat bilan',
+                      label: 'Liste des états de bilan',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/etat-bilan/list']
                     },
                     {
-                      label: 'Liste etat operation comptable',
+                      label: 'Liste des états d\'opération comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/etat-operation-comptable/list']
                     },
                     {
-                      label: 'Liste compte comptable',
+                      label: 'Liste des comptes comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/compte-comptable/list']
                     },
                 ]
               },
-
               {
-                label: 'Gestion TVA',
+                label: 'Géstion TVA',
                 icon: 'pi pi-wallet',
                 items:[
                     {
-                      label: 'Liste taux retard tva',
+                      label: 'Liste des taux de retard tva',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/tva/taux-retard-tva/list']
                     },
                     {
-                      label: 'Liste declaration tva',
+                      label: 'Liste des déclarations tva',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/tva/declaration-tva/list']
                     },
                 ]
               },
-
-
               {
-                label: 'Gestion IS',
+                label: 'Géstion IS',
                 icon: 'pi pi-wallet',
                 items:[
                     {
-                      label: 'Liste declaration is',
+                      label: 'Liste des déclarations IS',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/is/declaration-is/list']
                     },
                     {
-                      label: 'Liste taux is',
+                      label: 'Liste des taux IS',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/is/taux-is/list']
                     },
@@ -148,33 +145,42 @@ export class AppMenuComponent implements OnInit {
               },
 
               {
-                label: 'Gestion Abonne',
+                label: 'Géstion Abonné',
                 icon: 'pi pi-wallet',
                 items:[
-
                     {
-                      label: 'Liste abonne',
+                      label: 'Liste des stores',
+                      icon: 'pi pi-fw pi-plus-circle',
+                      routerLink: ['/app/admin/abonne/store/list']
+                    },
+                    {
+                      label: 'Liste des magasins',
+                      icon: 'pi pi-fw pi-plus-circle',
+                      routerLink: ['/app/admin/abonne/magasin/list']
+                    },
+                    {
+                      label: 'Liste des abonnés',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/abonne/abonne/list']
                     },
                     {
-                      label: 'Liste societe',
+                      label: 'Liste des sociétés',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/abonne/societe/list']
                     },
                 ]
               },
               {
-                label: 'Gestion Bilan',
+                label: 'Géstion Bilan',
                 icon: 'pi pi-wallet',
                 items:[
                     {
-                      label: 'Liste bilan',
+                      label: 'Liste des bilans',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/bilan/list']
                     },
                     {
-                      label: 'Liste operation comptable',
+                      label: 'Liste des opérations comptable',
                       icon: 'pi pi-fw pi-plus-circle',
                       routerLink: ['/app/admin/bilan/operation-comptable/list']
                     },

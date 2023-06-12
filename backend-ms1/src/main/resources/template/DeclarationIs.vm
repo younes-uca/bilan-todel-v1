@@ -29,7 +29,7 @@
             font-size: 35px;
             font-weight: bold;
             margin: 0;
-            color: #c9302c;
+            color: #074073;
         }
 
         .company-info {
@@ -107,19 +107,28 @@
 </head>
 <body>
 <div class="container">
+    <table >
+        <tr>
+            <td style="border-bottom: 0;width: 50%;padding: 0"><img src="$img3"></img> </td>
+            <td style="border-bottom: 0;width: 50%;padding: 0"></td>
+            <td style="border-bottom: 0;width: 50%;padding: 0"><img src="$img2"></img></td>
+            <td style="border-bottom: 0;width: 50%;padding: 0"></td>
+            <td style="border-bottom: 0;padding: 0"> <img src="$img1"></img></td>
+        </tr>
+    </table>
+    <hr style="color:#000000 ;height: 3px"></hr>
     <div class="header" style="font-family: Noto Sans JP, sans-serif;">
         <h1>REÇU</h1>
     </div><br/>
-    <hr style="color:#c9302c ;height: 3px"></hr><br/>
 
     <div class="bill-box">
         <div class="left">
-            <div class="text-m" style="font-size: 22px">DE:</div>
-            <div class="title" style="font-size: 30px;margin-bottom: 1rem;font-weight: 600;color: #2B2B2B;" >Trésorerie Générale<br/>Du Royaume</div>
-            <div class="addr">Rue Al andaloussia, Hay Riad<br/>Rabat, +212 5 37 57 81 90<br/>administ@tgr.gov.ma</div>
+            <div class="text-m" style="font-size: 18px">DE:</div>
+            <div class="title" style="font-size: 18px;margin-bottom: 1rem;font-weight: 600;color: #2B2B2B;" >Smart Compta</div>
+            <div class="addr" style="font-size: 14px">Rue Al andaloussia, Hay Riad<br/>Rabat, +212 5 37 57 81 90<br/>contact@scompta.ma</div>
         </div>
 
-    </div><br/><br/><br/><br/>
+    </div><br/><br/>
 
     <table style="width: 100%">
 
@@ -130,18 +139,19 @@
 
         <tr>
             <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Trimestre:</span> $trimistre</td>
-            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total charge:</span> $totalCharge</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total charge:</span> $totalCharge DH</td>
         </tr>
 
         <tr>
-            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total produit:</span> $totalProduit</td>
-            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat avant impôt:</span> $resultatAvantImpot</td>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Total produit:</span> $totalProduit DH</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat avant impôt:</span> $resultatAvantImpot DH</td>
         </tr>
 
         <tr>
-            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Montant impôt:</span> $montantImpot</td>
-            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat après impôt:</span> $resultatApresImpot</td>
+            <td style="text-align: left;border-bottom: 0;width: 40%;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Montant impôt:</span> $montantImpot DH</td>
+            <td style="text-align: left;border-bottom: 0;font-size: 22px;height: 50px"> <span style="font-weight: bold;">Résultat après impôt:</span> $resultatApresImpot DH</td>
         </tr>
+
 
 
 
@@ -152,10 +162,10 @@
         <p style="font-size: 18px">MERCI POUR VOTRE SERVICE!</p>
         <p style="font-size: 14px;margin-top: 1rem;">www.tgr.gov.ma</p>
     </div><br/>
-    <hr style="color:#c9302c ;height: 3px"></hr>
+    <hr style="color:#000000 ;height: 3px"></hr>
     <table style="width: 100%;">
-        <tr style="padding:0px 8px">
-            <td style="text-align: left;border-bottom: 0;padding:8px 8px;height: 5px"> <span style="font-weight: bold;">Date declaration:</span> $dateDeclaration</td>
+        <tr style="padding:0px 0px">
+            <td style="text-align: left;border-bottom: 0;padding:0px 0px;height: 5px"> <span style="font-weight: bold;">Date declaration:</span> $dateDeclaration</td>
         </tr>
     </table>
 </div>

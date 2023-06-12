@@ -119,6 +119,8 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
             message: 'Voulez-vous supprimer ces éléments ?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            acceptLabel:'Oui',
+            rejectLabel:'Non',
             accept: () => {
                 this.service.deleteMultiple().subscribe(() => {
                     this.items = this.items.filter(item => !this.selections.includes(item));
@@ -147,6 +149,8 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
             message: 'Voulez-vous supprimer cet élément ?',
             header: 'Confirmation',
             icon: 'pi pi-exclamation-triangle',
+            acceptLabel:'Oui',
+            rejectLabel:'Non',
             accept: () => {
                 this.service.delete(dto).subscribe(status => {
                     if (status > 0) {

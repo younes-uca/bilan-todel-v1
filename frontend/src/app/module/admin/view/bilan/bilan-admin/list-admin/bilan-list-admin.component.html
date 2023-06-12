@@ -4,21 +4,11 @@
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Bilan')"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                                        <button pButton pRipple label="nouveau" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Bilan')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label="supprimer" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" chercher" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
-                <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
-                        <label for="file-upload" class="file-upload-label">
-                            <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
-                            <span class="upload-text">Click to select a file</span>
-                        </label>
-                        <input id="file-upload" type="file" (change)="onExcelFileSelected($event)" accept=".xlsx, .xls" style="display: none;">
-                        <p-splitButton (click)="importExcel()"  [disabled]="!excelFile" label=" {{'import' | translate}}" icon="pi pi-upload"  styleClass="p-button-help"  style="margin-right: 2% ; color: #1BA7AF"></p-splitButton>
-                    </div>
-                </ng-template>
+
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
@@ -216,7 +206,7 @@
                         <h5 class="p-m-0">{{'bilanHeader' | translate}}</h5>
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input pInputText type="text" placeholder="{{'chercher'}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                     </div>
                 </ng-template>
@@ -228,7 +218,7 @@
                                 
                         <th pSortableColumn="ref">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Ref' | translate}}</span>
+                                <span>{{'Réf' | translate}}</span>
                                 <p-sortIcon field="ref"></p-sortIcon>
                                 <p-columnFilter type="text" field="element.ref" display="menu" class="ml-auto"></p-columnFilter>
                             </div>
@@ -237,7 +227,7 @@
                                 
                         <th pSortableColumn="annee">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Annee' | translate}}</span>
+                                <span>{{'Année' | translate}}</span>
                                 <p-sortIcon field="annee"></p-sortIcon>
                             </div>
                         </th>
@@ -245,7 +235,7 @@
                                 
                         <th pSortableColumn="societe">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Societe' | translate}}</span>
+                                <span>{{'Société' | translate}}</span>
                                 <p-sortIcon field="societe"></p-sortIcon>
                             </div>
                         </th>
@@ -269,7 +259,7 @@
                                 
                         <th pSortableColumn="immobilisationsFinancieres">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Immobilisations financieres' | translate}}</span>
+                                <span>{{'Immobilisations financières' | translate}}</span>
                                 <p-sortIcon field="immobilisationsFinancieres"></p-sortIcon>
                             </div>
                         </th>
@@ -277,7 +267,7 @@
                                 
                         <th pSortableColumn="totalActifImmobolise">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Total actif immobolise' | translate}}</span>
+                                <span>{{'Total actif immobilisé' | translate}}</span>
                                 <p-sortIcon field="totalActifImmobolise"></p-sortIcon>
                             </div>
                         </th>
@@ -293,7 +283,7 @@
                                 
                         <th pSortableColumn="creancesClients">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Creances clients' | translate}}</span>
+                                <span>{{'Créances clients' | translate}}</span>
                                 <p-sortIcon field="creancesClients"></p-sortIcon>
                             </div>
                         </th>
@@ -428,22 +418,22 @@
                         <td>{{element.societe?.ice}}</td>
                             
                             
-                        <td>{{element.immobilisationsIncorporelles}}</td>
+                        <td>{{element.immobilisationsIncorporelles}} DH</td>
                             
                             
-                        <td>{{element.immobilisationsCorporelles}}</td>
+                        <td>{{element.immobilisationsCorporelles}} DH</td>
                             
                             
-                        <td>{{element.immobilisationsFinancieres}}</td>
+                        <td>{{element.immobilisationsFinancieres}} DH</td>
                             
                             
-                        <td>{{element.totalActifImmobolise}}</td>
+                        <td>{{element.totalActifImmobolise}} DH</td>
                             
                             
-                        <td>{{element.stocks}}</td>
+                        <td>{{element.stocks}} DH</td>
                             
                             
-                        <td>{{element.creancesClients}}</td>
+                        <td>{{element.creancesClients}} DH</td>
                             
                              <!-- 
                         <td>{{element.totalActifCirculant}}</td>
@@ -488,7 +478,6 @@
                         <td>{{element.etatBilan?.libelle}}</td>
                              --> 
                         <td>
-                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
                             <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"></button>
@@ -500,7 +489,7 @@
                 <ng-template pTemplate="summary">
                     <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
                     <div class="p-d-flex p-ai-center p-jc-between">
-                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'bilan' : 'bilans' : 0 }}.
+                        En total il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'bilan' : 'bilans' : 0 }}.
                     </div>
                 </ng-template>
             </p-table>

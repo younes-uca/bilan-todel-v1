@@ -1,16 +1,16 @@
 
-<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'tauxIsTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'taux IS'}}" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <p-tabView>
-            <p-tabPanel header="{{'tauxIsTabPan' | translate}}">
+            <p-tabPanel header="{{'taux IS'}}">
                 <div class="grid">
                     <div class="field col-12 md:col-6">
-                        <label for="1">{{'Resultat min' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Resultat min' | translate}}" [(ngModel)]="item.resultatMin"></p-inputNumber>
+                        <label for="1">{{'Résultat min'}}(DH)</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Résultat min'}}" [(ngModel)]="item.resultatMin"></p-inputNumber>
                     </div>
                     <div class="field col-12 md:col-6">
-                        <label for="2">{{'Resultat max' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Resultat max' | translate}}" [(ngModel)]="item.resultatMax"></p-inputNumber>
+                        <label for="2">{{'Résultat max'}}(DH)</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Résultat max'}}" [(ngModel)]="item.resultatMax"></p-inputNumber>
                     </div>
                     <div class="field col-12 md:col-6">
                         <label for="3">{{'Date application min' | translate}}</label>

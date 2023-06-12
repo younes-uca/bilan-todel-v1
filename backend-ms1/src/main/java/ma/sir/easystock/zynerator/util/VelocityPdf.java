@@ -54,7 +54,9 @@ public class VelocityPdf {
                 e.printStackTrace();
             }
         }
-
+        context.put("img1","src/main/resources/template/1.png");
+        context.put("img2","src/main/resources/template/2.png");
+        context.put("img3","src/main/resources/template/3.png");
         /* now render the template into a StringWriter */
         StringWriter writer = new StringWriter();
         t.merge(context, writer);

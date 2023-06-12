@@ -1,80 +1,80 @@
-<p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'declarationIsTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false" >
+<p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'déclaration IS'}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false" >
     <ng-template pTemplate="content" >
         <p-tabView>
-            <p-tabPanel header="{{'declarationIsTabPan' | translate}}">
+            <p-tabPanel header="{{'déclaration IS'}}">
                 <div class="grid">
                     <div class="field col-12 md:col-3">
-                        <label for="1">{{'declarationIsReference' | translate}}<span style="color: red;">*</span></label>
-                        <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'declarationIsReference' | translate}}" id="1" [(ngModel)]="item.reference"
+                        <label for="1">{{'référence'}}<span style="color: red;">*</span></label>
+                        <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'référence'}}" id="1" [(ngModel)]="item.reference"
                                [ngClass]="{'ng-invalid ng-dirty' : !validDeclarationIsReference}"  />
                         <small class='p-error' *ngIf='!validDeclarationIsReference'>Reference est obligatoire.</small>
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="4">{{'declarationIsSociete' | translate}}</label>
+                        <label for="4">{{'Société'}}</label>
                         <p-dropdown  appendTo="body"  [options]="societes" [(ngModel)]="item.societe" id="4" [filter]="true" filterMatchMode="contains"
-                                     [showClear]="true" optionLabel="ice" placeholder="{{'declarationIsSociete' | translate}}"  (ngModelChange)="getAnnee();getTrimestre()" >
+                                     [showClear]="true" optionLabel="ice" placeholder="{{'Société'}}"  (ngModelChange)="getAnnee();getTrimestre()" >
                         </p-dropdown>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="3">{{'declarationIsAnnee' | translate}}</label>
+                        <label for="3">{{'Année'}}</label>
                         <p-dropdown  appendTo="body"  [options]="years" [(ngModel)]="item.annee" id="3" [filter]="true" filterMatchMode="contains"
-                                     [showClear]="true"  placeholder="{{'declarationIsAnnee' | translate}}"  >
+                                     [showClear]="true"  placeholder="{{'Année'}}"  >
                         </p-dropdown>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="2">{{'declarationIsTrimistre' | translate}}</label>
+                        <label for="2">{{'Trimestre'}}</label>
                         <p-dropdown  appendTo="body"  [options]="trimestres" [(ngModel)]="item.trimistre" id="2" [filter]="true" filterMatchMode="contains"
-                                     [showClear]="true"  placeholder="{{'declarationIsTrimistre' | translate}}"  >
+                                     [showClear]="true"  placeholder="{{'Trimestre'}}"  >
                         </p-dropdown>
 
                     </div>
 
 
                     <div class="field col-12 md:col-3">
-                        <label for="5">{{'declarationIsTotalCharge' | translate}}</label>
+                        <label for="5">{{'declarationIsTotalCharge' | translate}}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'declarationIsTotalCharge' | translate}}" [(ngModel)]="item.totalCharge"  >
                         </p-inputNumber>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="6">{{'declarationIsTotalProduit' | translate}}</label>
+                        <label for="6">{{'declarationIsTotalProduit' | translate}}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'declarationIsTotalProduit' | translate}}" [(ngModel)]="item.totalProduit"  >
                         </p-inputNumber>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="7">{{'declarationIsResultatAvantImpot' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'declarationIsResultatAvantImpot' | translate}}" [disabled]="true" [(ngModel)]="item.resultatAvantImpot"  >
+                        <label for="7">{{'Résultat Avant Impôt'}}(DH)</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'Résultat Avant Impôt'}}" [disabled]="true" [(ngModel)]="item.resultatAvantImpot"  >
                         </p-inputNumber>
 
                     </div>
 
 
                     <div class="field col-12 md:col-3">
-                        <label for="9">{{'declarationIsMontantImpot' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="9" placeholder="{{'declarationIsMontantImpot' | translate}}" [disabled]="true" [(ngModel)]="item.montantImpot"  >
+                        <label for="9">{{'Montant Impôt'}}(DH)</label>
+                        <p-inputNumber class="mb-2 mr-2" id="9" placeholder="{{'Montant Impôt'}}" [disabled]="true" [(ngModel)]="item.montantImpot"  >
                         </p-inputNumber>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="10">{{'declarationIsResultatApresImpot' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="10" placeholder="{{'declarationIsResultatApresImpot' | translate}}" [disabled]="true" [(ngModel)]="item.resultatApresImpot"  >
+                        <label for="10">{{'Résultat Après Impôt'}}(DH)</label>
+                        <p-inputNumber class="mb-2 mr-2" id="10" placeholder="{{'Résultat Après Impôt'}}" [disabled]="true" [(ngModel)]="item.resultatApresImpot"  >
                         </p-inputNumber>
 
                     </div>
 
 
                     <div class="field col-12 md:col-3">
-                        <label for="12">{{'declarationIsDateDeclaration' | translate}}</label>
-                        <p-calendar appendTo="body" id="12" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'declarationIsDateDeclaration' | translate}}"  [(ngModel)]="item.dateDeclaration"
+                        <label for="12">{{'Date Déclaration'}}</label>
+                        <p-calendar appendTo="body" id="12" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date Déclaration'}}"  [(ngModel)]="item.dateDeclaration"
                                     dateFormat="{{dateFormat}}" >
                         </p-calendar>
 
