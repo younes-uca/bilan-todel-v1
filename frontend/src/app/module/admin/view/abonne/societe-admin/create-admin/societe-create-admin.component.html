@@ -1,11 +1,11 @@
-        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'societeTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'société' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
                         <p-tabView>
-                            <p-tabPanel header="{{'societeTabPan' | translate}}">
+                            <p-tabPanel header="{{'société' | translate}}">
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="1">{{'societeIce' | translate}}<span style="color: red;">*</span></label>
+                                                    <label for="1">{{'ICE'}}<span style="color: red;">*</span></label>
                                                     <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'societeIce' | translate}}" id="1" [(ngModel)]="item.ice"
                                                             [ngClass]="{'ng-invalid ng-dirty' : !validSocieteIce}"  />
                                                     <small class='p-error' *ngIf='!validSocieteIce'>Ice est obligatoire.</small>
@@ -14,8 +14,8 @@
 
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="2">{{'societeSiege' | translate}}</label>
-                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'societeSiege' | translate}}" id="2" [(ngModel)]="item.siege"
+                                                    <label for="2">{{'siège'}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'siège'}}" id="2" [(ngModel)]="item.siege"
                                                              />
                                                     
                                                 </div>
@@ -23,50 +23,39 @@
 
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="3">{{'societeDernierAnneePayerIs' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'societeDernierAnneePayerIs' | translate}}" [(ngModel)]="item.dernierAnneePayerIs"  >
+                                                    <label for="3">{{'Dernière Année Payée IS'}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'Dernière Année Payée IS'}}" [(ngModel)]="item.dernierAnneePayerIs"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="4">{{'societeDernierTrimestrePayerIs' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'societeDernierTrimestrePayerIs' | translate}}" [(ngModel)]="item.dernierTrimestrePayerIs"  >
+                                                    <label for="4">{{'Dernier Trimestre Payé IS'}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'Dernier Trimestre Payé IS'}}" [(ngModel)]="item.dernierTrimestrePayerIs"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="5">{{'societeDernierAnneePayerTva' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'societeDernierAnneePayerTva' | translate}}" [(ngModel)]="item.dernierAnneePayerTva"  >
+                                                    <label for="5">{{'Dernière Année Payée TVA'}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'Dernière Année Payée TVA'}}" [(ngModel)]="item.dernierAnneePayerTva"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="6">{{'societeDernierTrimestrePayerTva' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'societeDernierTrimestrePayerTva' | translate}}" [(ngModel)]="item.dernierTrimestrePayerTva"  >
+                                                    <label for="6">{{'Dernier Trimestre Payé TVA'}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'Dernier Trimestre Payé TVA'}}" [(ngModel)]="item.dernierTrimestrePayerTva"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
-                                                <div class="field align-inputswitch col-12  md:col-4">
-                                                    <div  class="label-inputswitch">
-                                                        <label for="7">{{'societeBloqued' | translate}}</label>
-                                                    </div>
-                                                    <div class="input-switch">
-                                                        <p-inputSwitch id="7"  [(ngModel)]="item.bloqued"
-                                                                 >
-                                                        </p-inputSwitch>
-                                                        
-                                                    </div>
-                                                </div>
 
 
                                             <div class="field col-11 md:col-3">
-                                                <label for="9">{{'societeAbonne' | translate}}</label>
+                                                <label for="9">{{'Abonné'}}</label>
                                                 <p-dropdown  appendTo="body"  [options]="abonnes" [(ngModel)]="item.abonne" id="9" [filter]="true" filterMatchMode="contains"
-                                                        [showClear]="true" optionLabel="code" placeholder="{{'societeAbonne' | translate}}"  >
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'Abonné'}}"  >
                                                 </p-dropdown>
                                                 
                                             </div>

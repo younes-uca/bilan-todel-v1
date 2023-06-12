@@ -8,11 +8,6 @@
                     <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'supprimer'}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
                     <button pButton pRipple label=" {{'chercher' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
-                <ng-template pTemplate="right">
-                    <div class="flex">
-                        <p-splitButton label=" {{'exporter' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
-                    </div>
-                </ng-template>
 
             </p-toolbar>
             <p-toolbar *ngIf="findByCriteriaShow">
@@ -20,19 +15,19 @@
                 <div class="align-form-search">
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.resultatMinMin" id="1-1"></p-inputNumber>
-                            <label for="1-1">{{'Resultat min' | translate}} Min</label>
+                            <label for="1-1">{{'Résultat min' | translate}} Min</label>
                         </span>
                        <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.resultatMinMax" id="1-2"></p-inputNumber>
-                            <label for="1-2">{{'Resultat min' | translate}} Max</label>
+                            <label for="1-2">{{'Résultat min' | translate}} Max</label>
                        </span>
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.resultatMaxMin" id="2-1"></p-inputNumber>
-                            <label for="2-1">{{'Resultat max' | translate}} Min</label>
+                            <label for="2-1">{{'Résultat max' | translate}} Min</label>
                         </span>
                        <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.resultatMaxMax" id="2-2"></p-inputNumber>
-                            <label for="2-2">{{'Resultat max' | translate}} Max</label>
+                            <label for="2-2">{{'Résultat max' | translate}} Max</label>
                        </span>
 
                         <span class=" p-float-label mr-3 align-search-items mt-4">
