@@ -44,7 +44,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static org.slf4j.helpers.Util.getCallingClass;
+
 
 public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H extends HistBusinessObject, CRITERIA extends BaseCriteria, HC extends HistCriteria, REPO extends AbstractRepository<T, Long>, HISTREPO extends AbstractHistoryRepository<H, Long>> extends AbstractServiceImplHelper<T> {
 
@@ -432,6 +432,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
 
             try {
                 List<T> items = read(file.getInputStream(), getAttributes());
+
                 this.dao.saveAll(items);
                 return items;
             } catch (IOException e) {
@@ -451,7 +452,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
     // create a methode that reade the file and take an inputStream as object and return a liste of commandes
-    private List<T> read(InputStream inputStream, List<Attribute> attributes) {
+    public List<T> read(InputStream inputStream, List<Attribute> attributes) {
         List<T> items = new ArrayList<>();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -487,6 +488,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
                     if (complexType != null && value != null) {
                         beanWrapper.setPropertyValue(attributeName.split("\\.")[0], complexType.getDeclaredConstructor().newInstance());
                         beanWrapper.setPropertyValue(attributeName, value);
+
                     } else if (complexType == null) {
                         beanWrapper.setPropertyValue(attributes.get(cellIndex).getName(), value);
 

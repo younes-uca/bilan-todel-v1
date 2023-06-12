@@ -1,6 +1,5 @@
 package ma.sir.easystock.service.facade.admin;
 
-import java.util.List;
 import ma.sir.easystock.bean.core.TypeOperationComptable;
 import ma.sir.easystock.dao.criteria.core.TypeOperationComptableCriteria;
 import ma.sir.easystock.dao.criteria.history.TypeOperationComptableHistoryCriteria;
@@ -14,5 +13,7 @@ public interface TypeOperationComptableAdminService extends  IService<TypeOperat
 
     HttpEntity<byte[]> createPdf(TypeOperationComptableDto dto) throws Exception;
 
+    TypeOperationComptable findByCode(String code);
 
+    TypeOperationComptable findByReferenceEntity(TypeOperationComptable typeOperationComptable);
 }

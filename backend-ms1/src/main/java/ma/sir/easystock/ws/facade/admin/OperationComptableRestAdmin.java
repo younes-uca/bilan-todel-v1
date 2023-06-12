@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.sir.easystock.zynerator.process.Result;
 
@@ -36,6 +38,11 @@ public class OperationComptableRestAdmin  extends AbstractController<OperationCo
     @PostMapping("import-excel")
     public ResponseEntity<List<OperationComptable>> importExcel(@RequestParam("file") MultipartFile file){
         return super.importExcel(file);
+    }
+    @PostMapping("hh")
+    public ResponseEntity<?> uploadCompteComptablesData(@RequestParam("file") MultipartFile file){
+        this.service.saveToDatabase(file);
+        return ResponseEntity.ok(Map.of("Message" , " CompteComptables data uploaded and saved to database successfully"));
     }
 
     @ApiOperation("Exporte pdf")

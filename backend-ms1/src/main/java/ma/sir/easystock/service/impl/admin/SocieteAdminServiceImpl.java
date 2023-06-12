@@ -26,8 +26,6 @@ import ma.sir.easystock.bean.core.Store;
 import ma.sir.easystock.service.facade.admin.AbonneAdminService ;
 import ma.sir.easystock.service.facade.admin.StoreAdminService ;
 
-
-import java.util.List;
 @Service
 public class SocieteAdminServiceImpl extends AbstractServiceImpl<Societe,SocieteHistory, SocieteCriteria, SocieteHistoryCriteria, SocieteDao,
 SocieteHistoryDao> implements SocieteAdminService {
@@ -50,7 +48,14 @@ SocieteHistoryDao> implements SocieteAdminService {
         }
         return t;
     }
-
+    @Override
+    public Societe findByIce(String ice) {
+        return  dao.findByIce(ice);
+    }
+    @Override
+    public Societe findByReferenceEntity(Societe societe) {
+        return findByIce(societe.getIce());
+    }
     public Societe findWithAssociatedLists(Long id){
         Societe result = dao.findById(id).orElse(null);
         if(result!=null && result.getId() != null) {
@@ -73,9 +78,6 @@ SocieteHistoryDao> implements SocieteAdminService {
     }
     }
 
-    public Societe findByReferenceEntity(Societe t){
-        return  dao.findByIce(t.getIce());
-    }
 
     public List<Societe> findByAbonneId(Long id){
         return dao.findByAbonneId(id);

@@ -10,9 +10,12 @@ import ma.sir.easystock.zynerator.service.IService;
 
 import ma.sir.easystock.ws.dto.OperationComptableDto;
 import org.springframework.http.HttpEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface OperationComptableAdminService extends  IService<OperationComptable,OperationComptableCriteria, OperationComptableHistoryCriteria>  {
 
+
+    void saveToDatabase(MultipartFile file);
 
     Bilan createBilan(Bilan bilan);
 

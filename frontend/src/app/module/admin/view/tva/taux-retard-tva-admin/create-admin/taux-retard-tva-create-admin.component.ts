@@ -20,21 +20,7 @@ export class TauxRetardTvaCreateAdminComponent extends AbstractCreateController<
     ngOnInit(): void {
 
     }
-    public save(): void{
-        this.tauxRetardTvaService.save().subscribe(data =>{
-            if (data != null){
-                this.items.push({...data})
-                this.item = this.tauxRetardTvaService.constrcutDto();
-                this.createDialog = false;
-                alert('SAVE SUCCESS');
-            }else {
-                this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
 
-                alert('SAVE ERROR')
-            }
-
-        })
-    }
 
 
 

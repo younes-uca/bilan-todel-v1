@@ -23,7 +23,7 @@ import {UniteMesureDto} from 'src/app/controller/model/UniteMesure.model';
 export class ProduitListAdminComponent extends AbstractListController<ProduitDto, ProduitCriteria, ProduitService>  implements OnInit {
 
     fileName = 'Produit';
-    s
+
 
     categorieProduits :Array<CategorieProduitDto>;
     uniteMesures :Array<UniteMesureDto>;

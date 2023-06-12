@@ -9,9 +9,7 @@ import ma.sir.easystock.dao.facade.history.TypeOperationComptableHistoryDao;
 import ma.sir.easystock.dao.specification.core.TypeOperationComptableSpecification;
 import ma.sir.easystock.service.facade.admin.TypeOperationComptableAdminService;
 import ma.sir.easystock.zynerator.service.AbstractServiceImpl;
-import ma.sir.easystock.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 import ma.sir.easystock.zynerator.util.VelocityPdf;
 import ma.sir.easystock.ws.dto.TypeOperationComptableDto;
@@ -19,10 +17,6 @@ import org.springframework.http.HttpEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-
-
-import java.util.List;
 @Service
 public class TypeOperationComptableAdminServiceImpl extends AbstractServiceImpl<TypeOperationComptable,TypeOperationComptableHistory, TypeOperationComptableCriteria, TypeOperationComptableHistoryCriteria, TypeOperationComptableDao,
 TypeOperationComptableHistoryDao> implements TypeOperationComptableAdminService {
@@ -36,7 +30,14 @@ TypeOperationComptableHistoryDao> implements TypeOperationComptableAdminService 
 
 
 
-
+    @Override
+    public TypeOperationComptable findByCode(String code) {
+        return dao.findByCode(code) ;
+    }
+    @Override
+    public TypeOperationComptable findByReferenceEntity(TypeOperationComptable typeOperationComptable) {
+        return findByCode(typeOperationComptable.getCode());
+    }
 
 
 

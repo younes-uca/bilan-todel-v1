@@ -12,7 +12,7 @@ import java.util.List;
 public interface TauxRetardTvaDao extends AbstractRepository<TauxRetardTva,Long>  {
 
 
-    TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(int annee, int trimestre);
+    TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(LocalDateTime date,LocalDateTime datee);
 
     TauxRetardTva findByDateApplicationMax(LocalDateTime date);
 }

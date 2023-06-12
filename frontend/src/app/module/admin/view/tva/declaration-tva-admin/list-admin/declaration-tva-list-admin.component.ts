@@ -44,6 +44,10 @@ export class DeclarationTvaListAdminComponent extends AbstractListController<Dec
       this.loadComptableValidateur();
     }
 
+    async openCreate(): Promise<void> {
+        await super.openCreate();
+        this.societeService.findAll().subscribe((data) => this.societeService.items = data);
+    }
     public async loadDeclarationTvas(){
         await this.roleService.findAll();
         const isPermistted = await this.roleService.isPermitted('DeclarationTva', 'list');

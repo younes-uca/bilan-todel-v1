@@ -22,17 +22,6 @@
 
 
 
-                                                <div class="field align-inputswitch col-12  md:col-3">
-                                                    <div  class="label-inputswitch">
-                                                        <label for="3">{{'abonneBloqued' | translate}}</label>
-                                                    </div>
-                                                    <div class="input-switch">
-                                                        <p-inputSwitch id="3"  [(ngModel)]="item.bloqued"
-                                                                 >
-                                                        </p-inputSwitch>
-                                                        
-                                                    </div>
-                                                </div>
 
 
                                                 <div class="field col-12 md:col-3">
@@ -214,7 +203,7 @@
                                                                                 <th>Dernier trimestre payer is</th>
                                                                                 <th>Dernier annee payer tva</th>
                                                                                 <th>Dernier trimestre payer tva</th>
-                                                                                <th>Bloqued</th>
+
                                                                     <th>Actions</th>
                                                                 </tr>
                                                             </ng-template>
@@ -226,9 +215,7 @@
                                                                                 <td>{{p.dernierTrimestrePayerIs}}</td>
                                                                                 <td>{{p.dernierAnneePayerTva}}</td>
                                                                                 <td>{{p.dernierTrimestrePayerTva}}</td>
-                                                                                <td><i *ngIf="p.bloqued" class="pi pi-check checked-toogle"></i>
-                                                                                    <i *ngIf="!p.bloqued" class="pi pi-times unchecked-toogle"></i>
-                                                                                </td>
+
                                                                     <td>
                                                                         <button (click)="deleteSociete(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
                                                                         <button (click)="editSociete(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>

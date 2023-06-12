@@ -27,12 +27,36 @@ export class OperationComptableService extends AbstractService<OperationComptabl
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/operationComptable/');
     }
+    private _operationComptable : OperationComptableDto;
+    private _operationComptables : Array<OperationComptableDto>;
 
     public constrcutDto(): OperationComptableDto {
         return new OperationComptableDto();
     }
 
+    saveToDatabase(file: File): Observable<Array<OperationComptableDto>> {
+        const formData: FormData = new FormData();
+        formData.append('file', file, file.name);
+        console.log('daz');
+        return this.http.post<Array<OperationComptableDto>>(this.API + 'hh', formData);
+    }
     public constrcutCriteria(): OperationComptableCriteria {
         return new OperationComptableCriteria();
+    }
+
+    get operationComptable(): OperationComptableDto {
+        return this._operationComptable;
+    }
+
+    set operationComptable(value: OperationComptableDto) {
+        this._operationComptable = value;
+    }
+
+    get operationComptables(): Array<OperationComptableDto> {
+        return this._operationComptables;
+    }
+
+    set operationComptables(value: Array<OperationComptableDto>) {
+        this._operationComptables = value;
     }
 }

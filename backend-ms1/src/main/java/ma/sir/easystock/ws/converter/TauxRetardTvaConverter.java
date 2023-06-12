@@ -28,9 +28,9 @@ public class TauxRetardTvaConverter extends AbstractConverter<TauxRetardTva, Tau
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if(StringUtil.isNotEmpty(dto.getDateApplicationMin()))
-                item.setDateApplicationMin(DateUtil.stringEnToDate(dto.getDateApplicationMin()));
+                item.setDateApplicationMin(DateUtil.stringToDateTimeIs(dto.getDateApplicationMin()));
             if(StringUtil.isNotEmpty(dto.getDateApplicationMax()))
-                item.setDateApplicationMax(DateUtil.stringEnToDate(dto.getDateApplicationMax()));
+                item.setDateApplicationMax(DateUtil.stringToDateTimeIs(dto.getDateApplicationMax()));
             if(StringUtil.isNotEmpty(dto.getMontant()))
                 item.setMontant(dto.getMontant());
 
@@ -48,9 +48,9 @@ public class TauxRetardTvaConverter extends AbstractConverter<TauxRetardTva, Tau
             if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
             if(item.getDateApplicationMin()!=null)
-                dto.setDateApplicationMin(DateUtil.dateTimeToString(item.getDateApplicationMin()));
+                dto.setDateApplicationMin(DateUtil.dateTimeToStringIs(item.getDateApplicationMin()));
             if(item.getDateApplicationMax()!=null)
-                dto.setDateApplicationMax(DateUtil.dateTimeToString(item.getDateApplicationMax()));
+                dto.setDateApplicationMax(DateUtil.dateTimeToStringIs(item.getDateApplicationMax()));
             if(StringUtil.isNotEmpty(item.getMontant()))
                 dto.setMontant(item.getMontant());
 

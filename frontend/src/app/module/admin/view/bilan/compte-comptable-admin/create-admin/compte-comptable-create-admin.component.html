@@ -1,14 +1,14 @@
         <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'compteComptableTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
                         <p-tabView>
-                            <p-tabPanel header="{{'compteComptableTabPan' | translate}}">
+                            <p-tabPanel header="{{'Compte Comptable'}}">
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
-                                                    <label for="1">{{'compteComptableLibelle' | translate}}<span style="color: red;">*</span></label>
-                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'compteComptableLibelle' | translate}}" id="1" [(ngModel)]="item.libelle"
+                                                    <label for="1">{{'Libellé'}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Libelle'}}" id="1" [(ngModel)]="item.libelle"
                                                             [ngClass]="{'ng-invalid ng-dirty' : !validCompteComptableLibelle}"  />
-                                                    <small class='p-error' *ngIf='!validCompteComptableLibelle'>Libelle est obligatoire.</small>
+                                                    <small class='p-error' *ngIf='!validCompteComptableLibelle'>Libellé est obligatoire.</small>
                                                 </div>
 
 
@@ -43,10 +43,10 @@
             <ng-template pTemplate="footer" >
                 <div class="grid-step">
                         <div style="margin-left: auto;">
-                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                            <button pButton pRipple  label="{{'valider' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
                         </div>
                         <div>
-                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                            <button pButton pRipple  label="{{'annuler' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                         </div>
 
                 </div>

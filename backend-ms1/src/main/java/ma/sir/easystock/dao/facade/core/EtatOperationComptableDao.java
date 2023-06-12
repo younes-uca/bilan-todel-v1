@@ -13,4 +13,7 @@ public interface EtatOperationComptableDao extends AbstractRepository<EtatOperat
 
     @Query("SELECT NEW EtatOperationComptable(item.id,item.libelle) FROM EtatOperationComptable item")
     List<EtatOperationComptable> findAllOptimized();
+
+
+    EtatOperationComptable findByCode(String code);
 }

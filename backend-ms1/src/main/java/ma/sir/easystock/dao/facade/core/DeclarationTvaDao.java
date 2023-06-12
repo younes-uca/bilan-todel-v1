@@ -24,4 +24,6 @@ public interface DeclarationTvaDao extends AbstractRepository<DeclarationTva,Lon
 
     @Query("SELECT NEW DeclarationTva(item.id,item.reference) FROM DeclarationTva item")
     List<DeclarationTva> findAllOptimized();
+
+    DeclarationTva findBySocieteIceAndAnneeAndTrimistre(String ice, int anne, int trim);
 }

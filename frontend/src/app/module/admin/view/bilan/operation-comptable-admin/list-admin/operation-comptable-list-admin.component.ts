@@ -23,13 +23,14 @@ import {EtatOperationComptableDto} from 'src/app/controller/model/EtatOperationC
 export class OperationComptableListAdminComponent extends AbstractListController<OperationComptableDto, OperationComptableCriteria, OperationComptableService>  implements OnInit {
 
     fileName = 'OperationComptable';
+    selectedFile: File | undefined;
 
     societes :Array<SocieteDto>;
     compteComptables :Array<CompteComptableDto>;
     typeOperationComptables :Array<TypeOperationComptableDto>;
     etatOperationComptables :Array<EtatOperationComptableDto>;
   
-    constructor(operationComptableService: OperationComptableService, private societeService: SocieteService, private compteComptableService: CompteComptableService, private typeOperationComptableService: TypeOperationComptableService, private etatOperationComptableService: EtatOperationComptableService) {
+    constructor(private operationComptableService: OperationComptableService, private societeService: SocieteService, private compteComptableService: CompteComptableService, private typeOperationComptableService: TypeOperationComptableService, private etatOperationComptableService: EtatOperationComptableService) {
         super(operationComptableService);
         this.pdfName='OperationComptable.pdf';
     }
@@ -42,6 +43,7 @@ export class OperationComptableListAdminComponent extends AbstractListController
       this.loadCompteComptable();
       this.loadTypeOperationComptable();
       this.loadEtatOperationComptable();
+      this.findAll()
     }
 
     public async loadOperationComptables(){
@@ -64,6 +66,27 @@ export class OperationComptableListAdminComponent extends AbstractListController
             {field: 'typeOperationComptable?.libelle', header: 'Type operation comptable'},
             {field: 'etatOperationComptable?.libelle', header: 'Etat operation comptable'},
         ];
+    }
+    uploadFile(): void {
+        if (this.selectedFile) {
+            this.operationComptableService.saveToDatabase(this.selectedFile).subscribe(
+                response => {
+                    console.log('File uploaded successfully!', response);
+                },
+                error => {
+                    console.error('Error uploading file:', error);
+                }
+            );
+        }
+    }
+    onFileSelected(event: any): void {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files.length > 0) {
+            this.selectedFile = input.files[0];
+        }
+    }
+    public findAll(): void {
+        this.operationComptableService.findAll().subscribe(data=> this.operationComptables= data)
     }
 
 
@@ -126,4 +149,19 @@ export class OperationComptableListAdminComponent extends AbstractListController
         //'Etat operation comptable': this.criteria.etatOperationComptable?.libelle ? this.criteria.etatOperationComptable?.libelle : environment.emptyForExport ,
         }];
       }
+    get operationComptable(): OperationComptableDto {
+        return this.operationComptableService.operationComptable;
+    }
+
+    set operationComptable(value: OperationComptableDto) {
+        this.operationComptableService.operationComptable = value;
+    }
+
+    get operationComptables(): Array<OperationComptableDto> {
+        return this.operationComptableService.operationComptables;
+    }
+
+    set operationComptables(value: Array<OperationComptableDto>) {
+        this.operationComptableService.operationComptables = value;
+    }
 }

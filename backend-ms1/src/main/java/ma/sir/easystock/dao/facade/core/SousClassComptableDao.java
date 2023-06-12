@@ -15,4 +15,6 @@ public interface SousClassComptableDao extends AbstractRepository<SousClassCompt
 
     @Query("SELECT NEW SousClassComptable(item.id,item.libelle) FROM SousClassComptable item")
     List<SousClassComptable> findAllOptimized();
+
+    SousClassComptable findByCode(String code);
 }

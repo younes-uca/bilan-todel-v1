@@ -17,10 +17,11 @@ import {SousClassComptableDto} from 'src/app/controller/model/SousClassComptable
 export class CompteComptableListAdminComponent extends AbstractListController<CompteComptableDto, CompteComptableCriteria, CompteComptableService>  implements OnInit {
 
     fileName = 'CompteComptable';
+    selectedFile: File | undefined;
 
     sousClassComptables :Array<SousClassComptableDto>;
   
-    constructor(compteComptableService: CompteComptableService, private sousClassComptableService: SousClassComptableService) {
+    constructor( private compteComptableService: CompteComptableService, private sousClassComptableService: SousClassComptableService) {
         super(compteComptableService);
         this.pdfName='CompteComptable.pdf';
     }
@@ -30,6 +31,7 @@ export class CompteComptableListAdminComponent extends AbstractListController<Co
       this.initExport();
       this.initCol();
       this.loadSousClassComptable();
+      this.findAll()
     }
 
     public async loadCompteComptables(){
@@ -48,6 +50,28 @@ export class CompteComptableListAdminComponent extends AbstractListController<Co
         ];
     }
 
+
+    uploadFile(): void {
+        if (this.selectedFile) {
+            this.service.saveToDatabase(this.selectedFile).subscribe(
+                response => {
+                    console.log('File uploaded successfully!', response);
+                },
+                error => {
+                    console.error('Error uploading file:', error);
+                }
+            );
+        }
+    }
+    onFileSelected(event: any): void {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files.length > 0) {
+            this.selectedFile = input.files[0];
+        }
+    }
+    public findAll(): void {
+        this.compteComptableService.findAll().subscribe(data=> this.compteComptables= data)
+    }
 
     public async loadSousClassComptable(){
         await this.roleService.findAll();
@@ -74,4 +98,19 @@ export class CompteComptableListAdminComponent extends AbstractListController<Co
         //'Sous class comptable': this.criteria.sousClassComptable?.libelle ? this.criteria.sousClassComptable?.libelle : environment.emptyForExport ,
         }];
       }
+    get compteComptable(): CompteComptableDto {
+        return this.compteComptableService.compteComptable;
+    }
+
+    set compteComptable(value: CompteComptableDto) {
+        this.compteComptableService.compteComptable = value;
+    }
+
+    get compteComptables(): Array<CompteComptableDto> {
+        return this.compteComptableService.compteComptables;;
+    }
+
+    set compteComptables(value: Array<CompteComptableDto>) {
+        this.compteComptableService.compteComptables = value;
+    }
 }

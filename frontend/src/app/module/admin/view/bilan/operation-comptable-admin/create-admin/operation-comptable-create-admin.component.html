@@ -1,21 +1,21 @@
         <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'operationComptableTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
             <ng-template pTemplate="content" >
                         <p-tabView>
-                            <p-tabPanel header="{{'operationComptableTabPan' | translate}}">
+                            <p-tabPanel header="{{'Liste des Opérations Comptable ' | translate}}">
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="1">{{'operationComptableLibelle' | translate}}<span style="color: red;">*</span></label>
-                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'operationComptableLibelle' | translate}}" id="1" [(ngModel)]="item.libelle"
+                                                    <label for="1">{{'Libellé'}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'libellé' }}" id="1" [(ngModel)]="item.libelle"
                                                             [ngClass]="{'ng-invalid ng-dirty' : !validOperationComptableLibelle}"  />
-                                                    <small class='p-error' *ngIf='!validOperationComptableLibelle'>Libelle est obligatoire.</small>
+                                                    <small class='p-error' *ngIf='!validOperationComptableLibelle'>Libellé est obligatoire.</small>
                                                 </div>
 
 
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="2">{{'operationComptableAnnee' | translate}}</label>
-                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'operationComptableAnnee' | translate}}" [(ngModel)]="item.annee"  >
+                                                    <label for="2">{{'Année' }}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'Année'}}" [(ngModel)]="item.annee"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
@@ -28,7 +28,7 @@
                                                 </div>
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="4">{{'operationComptableDateOperationComptable' | translate}}</label>
+                                                    <label for="4">{{'Date Opération Comptable' | translate}}</label>
                                                     <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'operationComptableDateOperationComptable' | translate}}"  [(ngModel)]="item.dateOperationComptable"
                                                             dateFormat="{{dateFormat}}"  >
                                                     </p-calendar>
@@ -36,16 +36,16 @@
                                                 </div>
 
                                                 <div class="field col-12 md:col-4">
-                                                    <label for="5">{{'operationComptableMontant' | translate}}</label>
+                                                    <label for="5">{{'Montant' }} (DH)</label>
                                                     <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'operationComptableMontant' | translate}}" [(ngModel)]="item.montant"  >
                                                     </p-inputNumber>
                                                     
                                                 </div>
 
                                             <div class="field col-11 md:col-3">
-                                                <label for="6">{{'operationComptableSociete' | translate}}</label>
+                                                <label for="6">{{'Société' | translate}}</label>
                                                 <p-dropdown  appendTo="body"  [options]="societes" [(ngModel)]="item.societe" id="6" [filter]="true" filterMatchMode="contains"
-                                                        [showClear]="true" optionLabel="ice" placeholder="{{'operationComptableSociete' | translate}}"  >
+                                                        [showClear]="true" optionLabel="ice" placeholder="{{'Société' | translate}}"  >
                                                 </p-dropdown>
                                                 
                                             </div>
@@ -61,9 +61,9 @@
                                                     <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateCompteComptable('CompteComptable')" class="p-button-success one-colonne-btn-success-align"></button>
                                                 </div>
                                             <div class="field col-11 md:col-3">
-                                                <label for="8">{{'operationComptableTypeOperationComptable' | translate}}</label>
+                                                <label for="8">{{'Type Opération Comptable' }}</label>
                                                 <p-dropdown  appendTo="body"  [options]="typeOperationComptables" [(ngModel)]="item.typeOperationComptable" id="8" [filter]="true" filterMatchMode="contains"
-                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'operationComptableTypeOperationComptable' | translate}}"  >
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'Type Opération Comptable' | translate}}"  >
                                                 </p-dropdown>
                                                 
                                             </div>
@@ -72,9 +72,9 @@
                                                     <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTypeOperationComptable('TypeOperationComptable')" class="p-button-success one-colonne-btn-success-align"></button>
                                                 </div>
                                             <div class="field col-11 md:col-3">
-                                                <label for="9">{{'operationComptableEtatOperationComptable' | translate}}</label>
+                                                <label for="9">{{'Etat Opération Comptable' | translate}}</label>
                                                 <p-dropdown  appendTo="body"  [options]="etatOperationComptables" [(ngModel)]="item.etatOperationComptable" id="9" [filter]="true" filterMatchMode="contains"
-                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'operationComptableEtatOperationComptable' | translate}}"  >
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'Etat Opération Comptable' | translate}}"  >
                                                 </p-dropdown>
                                                 
                                             </div>
@@ -92,10 +92,10 @@
             <ng-template pTemplate="footer" >
                 <div class="grid-step">
                         <div style="margin-left: auto;">
-                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                            <button pButton pRipple  label="{{'valider' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
                         </div>
                         <div>
-                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                            <button pButton pRipple  label="{{'supprimer' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                         </div>
 
                 </div>

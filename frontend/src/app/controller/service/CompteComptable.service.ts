@@ -19,10 +19,22 @@ import {SousClassComptableDto} from '../model/SousClassComptable.model';
   providedIn: 'root'
 })
 export class CompteComptableService extends AbstractService<CompteComptableDto, CompteComptableCriteria> {
+
+    private _compteComptable: CompteComptableDto;
+    private _compteComptables: Array<CompteComptableDto>;
      constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/compteComptable/');
+    }
+    saveToDatabase(file: File): Observable<Array<CompteComptableDto>> {
+        const formData: FormData = new FormData();
+        formData.append('file', file, file.name);
+
+        return this.http.post<Array<CompteComptableDto>>(this.API + "upload-compteComptables-data", formData);
+    }
+    public getCompteComptables(): Observable<Array<CompteComptableDto>> {
+        return  this.http.get<Array<CompteComptableDto>>(this.API+"List")
     }
 
     public constrcutDto(): CompteComptableDto {
@@ -31,5 +43,22 @@ export class CompteComptableService extends AbstractService<CompteComptableDto, 
 
     public constrcutCriteria(): CompteComptableCriteria {
         return new CompteComptableCriteria();
+    }
+    get compteComptable(): CompteComptableDto {
+        if(this._compteComptable==null)
+            return this._compteComptable;
+    }
+
+    set compteComptable(value: CompteComptableDto) {
+        this._compteComptable = value;
+    }
+
+    get compteComptables(): Array<CompteComptableDto> {
+        if(this._compteComptables==null)
+            return this._compteComptables;
+    }
+
+    set compteComptables(value: Array<CompteComptableDto>) {
+        this._compteComptables = value;
     }
 }

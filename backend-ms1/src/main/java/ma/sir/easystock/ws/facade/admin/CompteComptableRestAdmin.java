@@ -14,10 +14,13 @@ import ma.sir.easystock.zynerator.controller.AbstractController;
 import ma.sir.easystock.zynerator.dto.AuditEntityDto;
 import ma.sir.easystock.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.sir.easystock.zynerator.process.Result;
 
@@ -31,7 +34,20 @@ import ma.sir.easystock.zynerator.dto.FileTempDto;
 @RequestMapping("/api/admin/compteComptable/")
 public class CompteComptableRestAdmin  extends AbstractController<CompteComptable, CompteComptableDto, CompteComptableHistory, CompteComptableCriteria, CompteComptableHistoryCriteria, CompteComptableAdminService, CompteComptableConverter> {
 
-
+    @PostMapping("import-excel")
+    public ResponseEntity<?> uploadCompteComptableData(@RequestParam("file") MultipartFile file){
+        this.service.importExcel(file);
+        return ResponseEntity.ok(Map.of("Message" , " Compte Comptable  data uploaded and saved to database successfully"));
+    }
+    @PostMapping("upload-compteComptables-data")
+    public ResponseEntity<?> uploadCompteComptablesData(@RequestParam("file") MultipartFile file){
+        this.service.saveToDatabase(file);
+        return ResponseEntity.ok(Map.of("Message" , " CompteComptables data uploaded and saved to database successfully"));
+    }
+    @GetMapping("List")
+    public ResponseEntity<List<CompteComptable>> getComptables(){
+        return new ResponseEntity<>(service.getCompteComptables(), HttpStatus.FOUND);
+    }
 
     @ApiOperation("Exporte pdf")
     @PostMapping("exportPdf/")

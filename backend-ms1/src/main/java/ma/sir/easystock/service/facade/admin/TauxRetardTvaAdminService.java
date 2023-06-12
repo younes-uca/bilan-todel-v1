@@ -18,7 +18,7 @@ public interface TauxRetardTvaAdminService extends  IService<TauxRetardTva,TauxR
 
     TauxRetardTva save(TauxRetardTva tauxRetardTva);
 
-    TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(int annee, int trimestre);
+    TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(LocalDateTime date);
 
     TauxRetardTva findByDateApplicationMax(LocalDateTime date);
 }

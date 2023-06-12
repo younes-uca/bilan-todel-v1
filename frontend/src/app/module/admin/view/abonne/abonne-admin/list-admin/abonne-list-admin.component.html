@@ -140,12 +140,7 @@
                         </th>
                                 
                                 
-                        <th pSortableColumn="bloqued">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Bloqued' | translate}}</span>
-                                <p-sortIcon field="bloqued"></p-sortIcon>
-                            </div>
-                        </th>
+
                                 
                                 
                         <th pSortableColumn="dateCreation">
@@ -277,10 +272,7 @@
                             
                         <td>{{element.adresse}}</td>
                             
-                            
-                        <td><i *ngIf="element.bloqued" class="pi pi-check checked-toogle"></i>
-                            <i *ngIf="!element.bloqued" class="pi pi-times unchecked-toogle"></i>
-                        </td>
+
                             
                             
                         <td>{{element.dateCreation | date :'dd/MM/yyyy HH:mm' }}</td>

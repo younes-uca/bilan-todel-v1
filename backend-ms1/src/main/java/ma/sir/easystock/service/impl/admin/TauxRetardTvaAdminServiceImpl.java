@@ -49,8 +49,8 @@ public class TauxRetardTvaAdminServiceImpl extends AbstractServiceImpl<TauxRetar
     }
 
     @Override
-    public TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(int annee, int trimestre) {
-        return dao.findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(annee, trimestre);
+    public TauxRetardTva findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(LocalDateTime date) {
+        return dao.findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(date,date);
     }
 
     @Override

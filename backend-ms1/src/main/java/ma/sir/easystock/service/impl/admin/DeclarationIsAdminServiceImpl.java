@@ -85,6 +85,7 @@ DeclarationIsHistoryDao> implements DeclarationIsAdminService {
         return declarationIs;
     }
 
+
     public LocalDateTime getDateMaxDeclaration(int annee, int trimestre) {
         LocalDateTime dateMax = null;
         if (trimestre == 1) {

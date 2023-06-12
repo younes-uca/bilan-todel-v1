@@ -25,9 +25,7 @@ export class TauxRetardTvaService extends AbstractService<TauxRetardTvaDto, Taux
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/tauxRetardTva/');
     }
-    public save(): Observable<TauxRetardTvaDto> {
-        return this.http.post<TauxRetardTvaDto>(this.API, this.item)
-    }
+
 
     public constrcutDto(): TauxRetardTvaDto {
         return new TauxRetardTvaDto();

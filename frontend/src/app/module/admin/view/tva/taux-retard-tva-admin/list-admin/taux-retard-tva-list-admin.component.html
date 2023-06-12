@@ -4,13 +4,13 @@
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('TauxRetardTva')"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
-                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                                        <button pButton pRipple label=" {{'nouveau' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('TauxRetardTva')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'supprimer' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'chercher' }}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
                     <div class="flex">
-                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                        <p-splitButton label=" {{'exporter'}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
                     </div>
                 </ng-template>
 
@@ -50,16 +50,16 @@
 
                         <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.montantMin" id="3-1"></p-inputNumber>
-                            <label for="3-1">{{'Montant' | translate}} Min</label>
+                            <label for="3-1">{{'Montant' }} (DH)Min</label>
                         </span>
                        <span class=" p-float-label mr-3 align-search-items mt-4">
                             <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.montantMax" id="3-2"></p-inputNumber>
-                            <label for="3-2">{{'Montant' | translate}} Max</label>
+                            <label for="3-2">{{'Montant' }} (DH)Max</label>
                        </span>
                 </div>
 
                 <div class="align-search-button">
-                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                    <button pButton pRipple label="{{'valider' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
                 </div>
             </p-toolbar>
 
@@ -71,10 +71,10 @@
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column flex-row justify-content-between table-header">
-                        <h5 class="p-m-0">{{'tauxRetardTvaHeader' | translate}}</h5>
+                        <h5 class="p-m-0">{{'Liste des taux Tva' }}</h5>
                         <span class="p-input-icon-left ml-auto">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                            <input pInputText type="text" placeholder="{{'chercher' }}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
                         </span>
                     </div>
                 </ng-template>
@@ -102,7 +102,7 @@
                                 
                         <th pSortableColumn="montant">
                             <div class="p-d-flex p-jc-between p-ai-center">
-                                <span>{{'Montant' | translate}}</span>
+                                <span>{{'Montant' }}</span>
                                 <p-sortIcon field="montant"></p-sortIcon>
                             </div>
                         </th>
@@ -116,20 +116,18 @@
                             <p-tableCheckbox [value]="element"></p-tableCheckbox>
                         </td>
                             
-                        <td>{{element.dateApplicationMin | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
-                        <td>{{element.dateApplicationMax | date :'dd/MM/yyyy HH:mm' }}</td>
-                            
-                            
-                        <td>{{element.montant}}</td>
+                        <td>{{element.dateApplicationMin  }}</td>
+
+
+                        <td *ngIf="element.dateApplicationMax">{{element.dateApplicationMax}}</td>
+                        <td *ngIf="!element.dateApplicationMax">en cours</td>
+
+
+                        <td>{{element.montant}} DH</td>
                             
                         <td>
-                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
                             <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
                             <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"></button>
-                            <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-secondary" (click)="exportPdf(element)"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -137,7 +135,7 @@
                 <ng-template pTemplate="summary">
                     <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
                     <div class="p-d-flex p-ai-center p-jc-between">
-                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'taux retard tva' : 'taux retard tvas' : 0 }}.
+                        En total il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'taux retard tva' : 'taux retard tva' : 0 }}.
                     </div>
                 </ng-template>
             </p-table>

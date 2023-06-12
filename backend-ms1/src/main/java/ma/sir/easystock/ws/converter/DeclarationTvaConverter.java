@@ -43,7 +43,7 @@ public class DeclarationTvaConverter extends AbstractConverter<DeclarationTva, D
             if(StringUtil.isNotEmpty(dto.getReference()))
                 item.setReference(dto.getReference());
             if(StringUtil.isNotEmpty(dto.getDateDeclaration()))
-                item.setDateDeclaration(DateUtil.stringEnToDate(dto.getDateDeclaration()));
+                item.setDateDeclaration(DateUtil.stringToDateTimeIs(dto.getDateDeclaration()));
             if(StringUtil.isNotEmpty(dto.getTrimistre()))
                 item.setTrimistre(dto.getTrimistre());
             if(StringUtil.isNotEmpty(dto.getAnnee()))
@@ -87,7 +87,7 @@ public class DeclarationTvaConverter extends AbstractConverter<DeclarationTva, D
             if(StringUtil.isNotEmpty(item.getReference()))
                 dto.setReference(item.getReference());
             if(item.getDateDeclaration()!=null)
-                dto.setDateDeclaration(DateUtil.dateTimeToString(item.getDateDeclaration()));
+                dto.setDateDeclaration(DateUtil.dateTimeToStringIs(item.getDateDeclaration()));
             if(StringUtil.isNotEmpty(item.getTrimistre()))
                 dto.setTrimistre(item.getTrimistre());
             if(StringUtil.isNotEmpty(item.getAnnee()))

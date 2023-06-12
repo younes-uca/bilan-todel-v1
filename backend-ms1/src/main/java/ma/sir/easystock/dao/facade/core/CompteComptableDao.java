@@ -15,4 +15,7 @@ public interface CompteComptableDao extends AbstractRepository<CompteComptable,L
 
     @Query("SELECT NEW CompteComptable(item.id,item.libelle) FROM CompteComptable item")
     List<CompteComptable> findAllOptimized();
+
+
+    CompteComptable findByCode(String code);
 }

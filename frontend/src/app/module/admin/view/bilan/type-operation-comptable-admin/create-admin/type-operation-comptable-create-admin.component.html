@@ -5,10 +5,10 @@
                                 <div class="grid">
 
                                                 <div class="field col-12 md:col-6">
-                                                    <label for="1">{{'typeOperationComptableLibelle' | translate}}<span style="color: red;">*</span></label>
-                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'typeOperationComptableLibelle' | translate}}" id="1" [(ngModel)]="item.libelle"
+                                                    <label for="1">{{'Libellé' }}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'Libellé' }}" id="1" [(ngModel)]="item.libelle"
                                                             [ngClass]="{'ng-invalid ng-dirty' : !validTypeOperationComptableLibelle}"  />
-                                                    <small class='p-error' *ngIf='!validTypeOperationComptableLibelle'>Libelle est obligatoire.</small>
+                                                    <small class='p-error' *ngIf='!validTypeOperationComptableLibelle'>Libellé est obligatoire.</small>
                                                 </div>
 
 
@@ -32,10 +32,10 @@
             <ng-template pTemplate="footer" >
                 <div class="grid-step">
                         <div style="margin-left: auto;">
-                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                            <button pButton pRipple  label="{{'valider' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
                         </div>
                         <div>
-                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                            <button pButton pRipple  label="{{'supprimer' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
                         </div>
 
                 </div>

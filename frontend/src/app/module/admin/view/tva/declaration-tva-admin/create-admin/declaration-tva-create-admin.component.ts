@@ -13,6 +13,7 @@ import {ComptableValidateurDto} from 'src/app/controller/model/ComptableValidate
 import {ComptableValidateurService} from 'src/app/controller/service/ComptableValidateur.service';
 import {TauxRetardTvaDto} from 'src/app/controller/model/TauxRetardTva.model';
 import {TauxRetardTvaService} from 'src/app/controller/service/TauxRetardTva.service';
+import {DeclarationIsDto} from "../../../../../../controller/model/DeclarationIs.model";
 
 @Component({
     selector: 'app-declaration-tva-create-admin',
@@ -20,6 +21,9 @@ import {TauxRetardTvaService} from 'src/app/controller/service/TauxRetardTva.ser
 })
 export class DeclarationTvaCreateAdminComponent extends AbstractCreateController<DeclarationTvaDto, DeclarationTvaCriteria, DeclarationTvaService> implements OnInit {
 
+    trimestres : number[] = [];
+    years: number[] = [];
+    private simuler : boolean = true;
 
     private _validDeclarationTvaReference = true;
     private _validSocieteIce = true;
@@ -42,27 +46,80 @@ export class DeclarationTvaCreateAdminComponent extends AbstractCreateController
     }
 
 
-    public save(): void {
-        this.declarationTvaService.savee(true).subscribe(data => {
-                if (data != null) {
-
-                    this.declarationTvaService.items.push({...data});
-                    this.item = this.declarationTvaService.constrcutDto();
+    public save():void{
+        this.declarationTvaService.savee(false).subscribe(data =>{
+                if(data != null) {
+                    this.declarationTvaService.items.push({...data}) ;
+                    this.item= this.declarationTvaService.constrcutDto();
                     this.createDialog = false;
-                    alert('save success')
-                } else {
-                    this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
-                }
+                    this.years=[];
+                    this.trimestres=[];
+                }else this.messageService.add({severity: 'error', summary: 'Erreurs', detail: 'Element existant'});
             }
         )
     }
 
     public onSimuler(): void {
+        if(this.getDateAvailable(this.item.annee,this.item.trimistre)<=new Date()){
+            this.simuler = false;
+            this.declarationTvaService.savee(true).subscribe(data => {
+                this.item = data;
+            });
+        }else alert("TAXE PAS ENCORE DISPONIBLE");
 
-        this.declarationTvaService.savee(true).subscribe(data => {
-            this.item = data;
+    }
+    public getDateAvailable(annee: number, trimestre: number): Date {
+        let date: Date | null = null;
+
+        if (trimestre === 1) {
+            date = new Date(annee, 3, 1, 0, 0, 0);
+        }
+        if (trimestre === 2) {
+            date = new Date(annee, 6, 1, 0, 0, 0);
+        }
+        if (trimestre === 3) {
+            date = new Date(annee, 9, 1, 0, 0, 0);
+        }
+        if (trimestre === 4) {
+            date = new Date(annee, 12,1, 0, 0, 0);
+        }
+        return date as Date;
+    }
+
+    public getAnnee() : void{
+        if (this.item.societe.dernierTrimestrePayerTva==4){
+            this.years=[this.item.societe.dernierAnneePayerTva+1];
+        }else {
+            this.years=[this.item.societe.dernierAnneePayerTva];
+        }
+    }
+
+    public getTrimestre() : void{
+        if (this.item.societe.dernierTrimestrePayerTva==4){
+            this.trimestres=[1];
+        }else {
+            this.trimestres=[this.item.societe.dernierTrimestrePayerTva+1];
+            console.log('khdama')
+        }
+    }
+    public hideCreateDialog() {
+        super.hideCreateDialog();
+        this.years=[];
+        this.trimestres=[];
+    }
+    public exportPdf(element: DeclarationTvaDto): void{
+        this.service.exportPdf(element).subscribe((data: ArrayBuffer) => {
+            const blob = new Blob([data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'DeclarationTva.pdf';
+            link.setAttribute('target', '_blank'); // open link in new tab
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }, (error) => {
+            console.error(error); // handle any errors that occur
         });
-
     }
 
 

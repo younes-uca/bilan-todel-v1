@@ -13,4 +13,6 @@ public interface TypeOperationComptableDao extends AbstractRepository<TypeOperat
 
     @Query("SELECT NEW TypeOperationComptable(item.id,item.libelle) FROM TypeOperationComptable item")
     List<TypeOperationComptable> findAllOptimized();
+
+    TypeOperationComptable findByCode(String code);
 }

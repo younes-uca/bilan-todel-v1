@@ -1,6 +1,8 @@
 package ma.sir.easystock.service.facade.admin;
 
 import java.util.List;
+
+import ma.sir.easystock.bean.core.CompteComptable;
 import ma.sir.easystock.bean.core.SousClassComptable;
 import ma.sir.easystock.dao.criteria.core.SousClassComptableCriteria;
 import ma.sir.easystock.dao.criteria.history.SousClassComptableHistoryCriteria;
@@ -17,4 +19,7 @@ public interface SousClassComptableAdminService extends  IService<SousClassCompt
     HttpEntity<byte[]> createPdf(SousClassComptableDto dto) throws Exception;
 
 
+    SousClassComptable findByCode(String code);
+
+    SousClassComptable findByReferenceEntity(SousClassComptable sousClassComptable);
 }

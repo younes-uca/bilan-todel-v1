@@ -15,4 +15,8 @@ public interface EtatOperationComptableAdminService extends  IService<EtatOperat
     HttpEntity<byte[]> createPdf(EtatOperationComptableDto dto) throws Exception;
 
 
+
+    EtatOperationComptable findByCode(String code);
+
+    EtatOperationComptable findByReferenceEntity(EtatOperationComptable etatOperationComptable);
 }

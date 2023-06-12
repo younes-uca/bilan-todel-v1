@@ -11,10 +11,12 @@ import org.springframework.http.HttpEntity;
 
 public interface SocieteAdminService extends  IService<Societe,SocieteCriteria, SocieteHistoryCriteria>  {
 
+    Societe findByIce(String ice);
+
     List<Societe> findByAbonneId(Long id);
     int deleteByAbonneId(Long id);
 
     HttpEntity<byte[]> createPdf(SocieteDto dto) throws Exception;
-
+    Societe findByReferenceEntity(Societe societe);
 
 }

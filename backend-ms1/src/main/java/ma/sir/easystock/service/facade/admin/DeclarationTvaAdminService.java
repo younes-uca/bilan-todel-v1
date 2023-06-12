@@ -2,6 +2,7 @@ package ma.sir.easystock.service.facade.admin;
 
 import java.util.List;
 import ma.sir.easystock.bean.core.DeclarationTva;
+import ma.sir.easystock.bean.core.Societe;
 import ma.sir.easystock.dao.criteria.core.DeclarationTvaCriteria;
 import ma.sir.easystock.dao.criteria.history.DeclarationTvaHistoryCriteria;
 import ma.sir.easystock.zynerator.service.IService;
@@ -24,4 +25,8 @@ public interface DeclarationTvaAdminService extends  IService<DeclarationTva,Dec
 
 
     DeclarationTva save(boolean simuler, DeclarationTva declarationTva);
+
+    void setDernierTrimestreEtAnneePaye(Societe societe, int annee, int trimestre);
+
+    DeclarationTva findBySocieteIceAndAnneeAndTrimistre(String ice, int anne, int trim);
 }

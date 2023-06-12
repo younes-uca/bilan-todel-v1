@@ -29,6 +29,7 @@ import ma.sir.easystock.service.facade.admin.ComptableTraitantAdminService;
 import ma.sir.easystock.service.facade.admin.SocieteAdminService;
 import ma.sir.easystock.service.facade.admin.ComptableValidateurAdminService;
 import ma.sir.easystock.service.facade.admin.TauxRetardTvaAdminService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DeclarationTvaAdminServiceImpl extends AbstractServiceImpl<DeclarationTva, DeclarationTvaHistory, DeclarationTvaCriteria, DeclarationTvaHistoryCriteria, DeclarationTvaDao,
@@ -39,6 +40,22 @@ public class DeclarationTvaAdminServiceImpl extends AbstractServiceImpl<Declarat
     @Override
     public HttpEntity<byte[]> createPdf(DeclarationTvaDto dto) throws Exception {
         return velocityPdf.createPdf(FILE_NAME, TEMPLATE, dto);
+    }
+    public void setDernierTrimestreEtAnneePaye(Societe societe, int annee, int trimestre){
+        int year,trim;
+        if (trimestre==4){
+            trim=1;
+            year=annee+1;
+        }else {
+            trim=trimestre+1;
+            year=annee;
+        }
+        if(findBySocieteIceAndAnneeAndTrimistre(societe.getIce(),year,trim)!=null){
+            setDernierTrimestreEtAnneePaye(societe,year,trim);
+        }else {
+            societe.setDernierAnneePayerTva(annee);
+            societe.setDernierTrimestrePayerTva(trimestre);
+        }
     }
 
 
@@ -96,7 +113,7 @@ public class DeclarationTvaAdminServiceImpl extends AbstractServiceImpl<Declarat
         int nbrMoisdeRetard = calculeMoisRetardTrimestrielle(annee, trimestre);
         if (nbrMoisdeRetard > 0) {
 
-            TauxRetardTva tauxRetardTva = tauxRetardTvaService.findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(annee, trimestre);
+            TauxRetardTva tauxRetardTva = tauxRetardTvaService.findByDateApplicationMaxGreaterThanEqualAndDateApplicationMinLessThanEqual(getDateMax(declarationTva.getAnnee(),declarationTva.getTrimistre()));
             if (tauxRetardTva == null) {
                 tauxRetardTva = tauxRetardTvaService.findByDateApplicationMax(null);
             }
@@ -107,19 +124,52 @@ public class DeclarationTvaAdminServiceImpl extends AbstractServiceImpl<Declarat
             montantTva = differenceTva.add(montantRetard);
 
         }
+        declarationTva.setSociete(societe);
         declarationTva.setDateDeclaration(LocalDateTime.now());
         declarationTva.setMontantTva(montantTva);
         declarationTva.setDifferenceTva(differenceTva);
 
         if (!simuler) {
-
-            return this.create(declarationTva);
+            setDernierTrimestreEtAnneePaye(declarationTva.getSociete(),declarationTva.getAnnee(),declarationTva.getTrimistre());
+            declarationTva=create(declarationTva);
 
         }
 
-        return dao.save(declarationTva);
+        return declarationTva;
 
 
+    }
+
+
+
+    @Override
+    public DeclarationTva findBySocieteIceAndAnneeAndTrimistre(String ice, int anne, int trim) {
+        return dao.findBySocieteIceAndAnneeAndTrimistre(ice, anne, trim);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        DeclarationTva declarationTva = findById(id);
+        Societe societe = declarationTva.getSociete();
+        if (getDateMax(declarationTva.getAnnee(), declarationTva.getTrimistre()).isBefore(getDateMax(societe.getDernierAnneePayerTva(), societe.getDernierTrimestrePayerTva())) || getDateMax(declarationTva.getAnnee(), declarationTva.getTrimistre()).isEqual(getDateMax(societe.getDernierAnneePayerIs(), societe.getDernierTrimestrePayerTva()))) {
+            if (declarationTva.getTrimistre() == 1) {
+                societe.setDernierTrimestrePayerTva(4);
+                societe.setDernierAnneePayerTva(declarationTva.getAnnee() - 1);
+            } else {
+                societe.setDernierTrimestrePayerTva(declarationTva.getTrimistre() - 1);
+                societe.setDernierAnneePayerIs(declarationTva.getAnnee());
+            }
+        }
+        dao.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void delete(List<DeclarationTva> declarationTvas) {
+        for (DeclarationTva declarationTva : declarationTvas) {
+            deleteById(declarationTva.getId());
+        }
     }
 
     public int calculeMoisRetardTrimestrielle(int annee, int trimestre) {

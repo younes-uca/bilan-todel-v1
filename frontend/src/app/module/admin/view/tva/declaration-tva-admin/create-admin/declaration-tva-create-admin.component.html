@@ -2,66 +2,59 @@
           [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
     <ng-template pTemplate="content">
         <p-tabView>
-            <p-tabPanel header="{{'declarationTvaTabPan' | translate}}">
+            <p-tabPanel header="{{'déclarationTvaTabPan' }}">
                 <div class="grid">
 
                     <div class="field col-12 md:col-3">
-                        <label for="1">{{'declarationTvaReference' | translate}}<span
+                        <label for="1">{{'Réference' }}<span
                                 style="color: red;">*</span></label>
                         <input class="mb-2 mr-2" type="text" pInputText
-                               placeholder="{{'declarationTvaReference' | translate}}" id="1"
+                               placeholder="{{'Réference' }}" id="1"
                                [(ngModel)]="item.reference"
                                [ngClass]="{'ng-invalid ng-dirty' : !validDeclarationTvaReference}"/>
-                        <small class='p-error' *ngIf='!validDeclarationTvaReference'>Reference est obligatoire.</small>
+                        <small class='p-error' *ngIf='!validDeclarationTvaReference'>Réference est obligatoire.</small>
                     </div>
-
-
                     <div class="field col-12 md:col-3">
-                        <label for="2">{{'declarationTvaDateDeclaration' | translate}}</label>
-                        <p-calendar appendTo="body" id="2" [showTime]="true" [showSeconds]="false"
-                                    placeholder="{{'declarationTvaDateDeclaration' | translate}}"
-                                    [(ngModel)]="item.dateDeclaration"
-                                    dateFormat="{{dateFormat}}">
-                        </p-calendar>
-
-                    </div>
-
-                    <div class="field col-12 md:col-3">
-                        <label for="3">{{'declarationTvaTrimistre' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'declarationTvaTrimistre' | translate}}"
-                                       [(ngModel)]="item.trimistre">
-                        </p-inputNumber>
-
-                    </div>
-
-                    <div class="field col-12 md:col-3">
-                        <label for="4">{{'declarationTvaAnnee' | translate}}</label>
-                        <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'declarationTvaAnnee' | translate}}"
-                                       [(ngModel)]="item.annee">
-                        </p-inputNumber>
-
-                    </div>
-
-                    <div class="field col-11 md:col-2">
-                        <label for="5">{{'declarationTvaSociete' | translate}}</label>
-                        <p-dropdown appendTo="body" [options]="societes" [(ngModel)]="item.societe" id="5"
-                                    [filter]="true" filterMatchMode="contains"
-                                    [showClear]="true" optionLabel="ice"
-                                    placeholder="{{'declarationTvaSociete' | translate}}">
+                        <label for="5">{{'Société' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="societes" [(ngModel)]="item.societe" id="5" [filter]="true" filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="ice" placeholder="{{'Société' }} " (ngModelChange)="getAnnee();getTrimestre()">
                         </p-dropdown>
 
                     </div>
+
+
+
+
                     <div class="field col-12 md:col-3">
-                        <label for="6">{{'declarationTvaTotalTvaCollecte' | translate}}</label>
+                        <label for="3">{{'Année' | translate}}</label>
+                        <p-dropdown  appendTo="body"  [options]="years" [(ngModel)]="item.annee" id="3" [filter]="true" filterMatchMode="contains"
+                                     [showClear]="true"  placeholder="{{'Année' | translate}}"  >
+                        </p-dropdown>
+
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Trimestre' | translate}}</label>
+                        <p-dropdown  appendTo="body"  [options]="trimestres" [(ngModel)]="item.trimistre" id="2" [filter]="true" filterMatchMode="contains"
+                                     [showClear]="true"  placeholder="{{'Trimestre' | translate}}"  >
+                        </p-dropdown>
+
+                    </div>
+
+
+
+
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Total Tva Collectée' }}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="6"
-                                       placeholder="{{'declarationTvaTotalTvaCollecte' | translate}}"
+                                       placeholder="{{'Total Tva Collectée' }}"
                                        [(ngModel)]="item.totalTvaCollecte">
                         </p-inputNumber>
 
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="7">{{'declarationTvaTotalTvaDue' | translate}}</label>
+                        <label for="7">{{'Total Tva Due' }}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="7"
                                        placeholder="{{'declarationTvaTotalTvaDue' | translate}}"
                                        [(ngModel)]="item.totalTvaDue">
@@ -70,57 +63,35 @@
                     </div>
 
                     <div class="field col-12 md:col-3">
-                        <label for="8">{{'declarationTvaDifferenceTva' | translate}}</label>
+                        <label for="8">{{'Différence Tva'}}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="8"
-                                       placeholder="{{'declarationTvaDifferenceTva' | translate}}"
-                                       [(ngModel)]="item.differenceTva">
+                                       placeholder="{{'Différence Tva'}}"
+                                       [(ngModel)]="item.differenceTva" [disabled]="true" >
                         </p-inputNumber>
 
                     </div>
 
-                    <div class="field col-11 md:col-2">
-                        <label for="9">{{'declarationTvaTauxRetardTva' | translate}}</label>
-                        <p-dropdown appendTo="body" [options]="tauxRetardTvas" [(ngModel)]="item.tauxRetardTva" id="9"
-                                    [filter]="true" filterMatchMode="contains"
-                                    [showClear]="true" optionLabel="id"
-                                    placeholder="{{'declarationTvaTauxRetardTva' | translate}}">
-                        </p-dropdown>
 
-                    </div>
-                    <div class="col-1">
-                        <label></label>
-                        <button pButton pRipple type="button" icon="pi pi-plus"
-                                (click)="openCreateTauxRetardTva('TauxRetardTva')"
-                                class="p-button-success one-colonne-btn-success-align"></button>
-                    </div>
+
                     <div class="field col-12 md:col-3">
-                        <label for="10">{{'declarationTvaMontantTva' | translate}}</label>
+                        <label for="10">{{'Montant Tva' }}(DH)</label>
                         <p-inputNumber class="mb-2 mr-2" id="10"
                                        placeholder="{{'declarationTvaMontantTva' | translate}}"
-                                       [(ngModel)]="item.montantTva">
+                                       [(ngModel)]="item.montantTva"[disabled]="true" >
                         </p-inputNumber>
 
                     </div>
+                <div class="field col-12 md:col-3">
+                    <label for="2">{{'Date Déclaration' }}</label>
+                    <p-calendar appendTo="body" id="2" [showTime]="true" [showSeconds]="false"
+                                placeholder="{{'Date Déclaration' | translate}}"
+                                [(ngModel)]="item.dateDeclaration"
+                                dateFormat="{{dateFormat}}" [disabled]="true">
+                    </p-calendar>
 
-                    <div class="field col-11 md:col-2">
-                        <label for="11">{{'declarationTvaComptableTraitant' | translate}}</label>
-                        <p-dropdown appendTo="body" [options]="comptableTraitants" [(ngModel)]="item.comptableTraitant"
-                                    id="11" [filter]="true" filterMatchMode="contains"
-                                    [showClear]="true" optionLabel="cin"
-                                    placeholder="{{'declarationTvaComptableTraitant' | translate}}">
-                        </p-dropdown>
+                </div>
 
-                    </div>
-                    <div class="field col-11 md:col-2">
-                        <label for="12">{{'declarationTvaComptableValidateur' | translate}}</label>
-                        <p-dropdown appendTo="body" [options]="comptableValidateurs"
-                                    [(ngModel)]="item.comptableValidateur" id="12" [filter]="true"
-                                    filterMatchMode="contains"
-                                    [showClear]="true" optionLabel="cin"
-                                    placeholder="{{'declarationTvaComptableValidateur' | translate}}">
-                        </p-dropdown>
 
-                    </div>
                 </div>
             </p-tabPanel>
 
@@ -128,19 +99,15 @@
 
     </ng-template>
 
-    <ng-template pTemplate="footer">
+    <ng-template pTemplate="footer" >
         <div class="grid-step">
             <div style="margin-left: auto;">
-                <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-check" style="margin:10px"
-                        (click)="save()"></button>
+                <button style="margin-bottom:10px;margin-right: 0px;opacity: 1" class="p-button-success" pButton pRipple label="Simuler" icon="pi pi-play" [disabled]="!(item.societe && item.annee && item.trimistre && item.totalTvaCollecte && item.totalTvaDue)" (click)="onSimuler()"></button>
+                <button style="margin-bottom:10px;margin-right: 0px;padding: 6.5px;opacity: 1" class="p-button-success" pButton pRipple icon="pi pi-download" [disabled]="simuler" (click)="exportPdf(item)"></button>
+                <button pButton pRipple label="valider"  icon="pi pi-check" style="margin:10px" [disabled]="simuler" (click)="save()"></button>
             </div>
             <div>
-                <button pButton pRipple label="Simuler" icon="pi pi-download " style=" background-color: #8A5340"
-                        (click)="onSimuler()"></button>
-            </div>
-            <div>
-                <button pButton pRipple label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined"
-                        (click)="hideCreateDialog()"></button>
+                <button pButton pRipple label="annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
             </div>
 
         </div>

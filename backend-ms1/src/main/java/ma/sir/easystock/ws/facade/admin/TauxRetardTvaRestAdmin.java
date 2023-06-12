@@ -35,7 +35,7 @@ public class TauxRetardTvaRestAdmin extends AbstractController<TauxRetardTva, Ta
 
 
     @ApiOperation("Save the tauxRetardTva")
-    @PostMapping("post")
+    @PostMapping("")
     public ResponseEntity<TauxRetardTvaDto> saveTaux(@RequestBody TauxRetardTvaDto tauxRetardTvaDto) throws Exception {
         if (tauxRetardTvaDto != null) {
             converter.init(true);
@@ -79,11 +79,7 @@ public class TauxRetardTvaRestAdmin extends AbstractController<TauxRetardTva, Ta
         return super.findById(id, includes, excludes);
     }
 
-    @ApiOperation("Saves the specified  tauxRetardTva")
-    @PostMapping("")
-    public ResponseEntity<TauxRetardTvaDto> save(@RequestBody TauxRetardTvaDto dto) throws Exception {
-        return super.save(dto);
-    }
+
 
     @ApiOperation("Updates the specified  tauxRetardTva")
     @PutMapping("update")
